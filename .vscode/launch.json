@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": 
+    [
+        {
+            "name": "manual_control",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pybricksdev",
+            "args": [
+                "run",
+                "ble",
+                "--name",
+                "YAHAV",
+                "manual_control.py"
+            ],
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONUTF8": "1"
+            }
+        },
+    ]
+}
