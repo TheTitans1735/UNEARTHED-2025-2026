@@ -21,12 +21,11 @@ class Robot:
     def run(self):
          # אזור מת מתחת לערך זה
         while True:
-            _, right_trigger = self.xbox.triggers()
+            left_trigger, right_trigger = self.xbox.triggers()
             pressed = self.xbox.buttons.pressed()
             x, y = self.xbox.joystick_left()  # X = שמאל/ימין, Y = קדימה/אחורה
-            print(f"Joystick: x={x}, y={y}, Right Trigger={right_trigger}, Buttons={pressed}")
+            # print(f"Joystick: x={x}, y={y}, Right Trigger={right_trigger}, Buttons={pressed}")
     # אם הג'ויסטיק כמעט במרכז -> עצור
-            
 
             if self.force_sensor.pressed():
                 self.xbox.rumble(70)
@@ -43,35 +42,54 @@ class Robot:
                 self.motor_back.stop()
                 self.motor_front.stop()
                 
-            if 10 < right_trigger <= 30:
-                self.drive_base.drive(50, 0)  # נסיעה איטית
-                
-                
+            # if 10 < right_trigger <= 30:
+            #     self.drive_base.drive(50, 0)  
                 
             # elif 30 < right_trigger <= 50:
-            #     print("פעולה ראשונה")
-            #     # לדוגמה:
             #     self.drive_base.drive(100, 0)
 
             # elif 50 < right_trigger <= 70:
-            #     print("פעולה שנייה")
-            #     # לדוגמה:
             #     self.drive_base.drive(200, 0)
 
             # elif right_trigger > 70:
-            #     print("פעולה שלישית")
-            #     # לדוגמה:
             #     self.drive_base.drive(300, 0)
+                
             # elif right_trigger <= 10:
             #     self.drive_base.stop()
                 
-            elif abs(x) < DEADZONE and abs(y) < DEADZONE:
+            # if 10 < left_trigger <= 30:
+            #     self.drive_base.drive(-50, 0)  # נסיעה אחורה איטית
+    
+            # elif 30 < left_trigger <= 50:
+            #     self.drive_base.drive(-100, 0)
+                
+            # elif 50 < left_trigger <= 70:
+            #     self.drive_base.drive(-200, 0)  
+                
+            # elif left_trigger > 70:
+            #     self.drive_base.drive(-300, 0)      
+            
+            # elif left_trigger <= 10:
+            #     self.drive_base.stop()
+                
+            
+                
+            if abs(x) < DEADZONE and abs(y) < DEADZONE:
                 self.drive_base.stop()
-            else:
-                # מהירות וסיבוב יחסית למיקום הג'ויסטיק
-                speed = int(y * 1)  # Y קדימה/אחורה
-                turn = int(x * 1)   # X סיבוב
+            elif Button.LB in pressed:
+                speed = int(y * 10)
+                turn = 0
+                self.drive_base.drive(speed, turn)
 
+            elif Button.RB in pressed:
+                speed = 0
+                turn = int(x * 10)
+                self.drive_base.drive(speed, turn)
+            
+            else:
+                # Normal driving, maybe less sensitive turn
+                speed = int(y * 10)
+                turn = int(x * 5)
                 self.drive_base.drive(speed, turn)
 
             wait(5)  # להמתין קצת לפני הקריאה הבאה
