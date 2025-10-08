@@ -17,17 +17,7 @@ async def stop_all():
     
     
 async def detect_color_and_run():
-    while True:
-        hsv = await ilan.color_sensor.hsv(surface=True)
-        print("HSV:", hsv )  # עוזר לדיבוג
-        # בדיקה: האם hsv הוא tuple/list עם 3 ערכים?
-        if not isinstance(hsv, (tuple, list)) or len(hsv) != 3:
-            print("X")
-            await wait(500)
-            continue
-        h, s, v = hsv
-        detected_color = await ilan.color_sensor.hsv(h, s, v)
-        print(f"Detected: {detected_color} (h={h}, s={s}, v={v})")
+        detected_color = ilan.color_sensor.color()
         await wait(100)
 
         if detected_color == Color.CYAN:

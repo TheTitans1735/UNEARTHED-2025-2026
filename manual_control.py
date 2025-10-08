@@ -11,12 +11,15 @@ class Robot:
         self.left_motor = Motor(Port.F, Direction.COUNTERCLOCKWISE)
         self.right_motor = Motor(Port.D)
         self.motor_front = Motor(Port.E)
-        self.motor_back = Motor(Port.C)
-        self.color_sensor = ColorSensor(Port.A)
+        self.motor_back = Motor(Port.A)
         self.drive_base = DriveBase(self.left_motor, self.right_motor, 62.4, 120)
-        self.force_sensor = ForceSensor(Port.B)
-        self.xbox = XboxController()
+        # self.color_sensor = ColorSensor(Port.C)
+        self.force_sensor = ForceSensor(port=Port.B)
         self.drive_base.use_gyro(True)
+        self.emergency_stop = False
+        self.color_sensor = ColorSensor(Port.C)
+
+        self.xbox = XboxController()
 
     def run(self):
          # אזור מת מתחת לערך זה
@@ -88,10 +91,10 @@ class Robot:
             
             else:
                 # Normal driving, maybe less sensitive turn
-                speed = int(y * 10)
-                turn = int(x * 5)
+                speed = int(y * 2)
+                turn = int(x * 1)
                 self.drive_base.drive(speed, turn)
 
-            wait(5)  # להמתין קצת לפני הקריאה הבאה
+            wait(1)  # להמתין קצת לפני הקריאה הבאה
 
 Robot().run()
