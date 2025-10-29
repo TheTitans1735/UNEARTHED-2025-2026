@@ -114,4 +114,20 @@ async def main():
         await multitask(monitor_roll(), detect_color_and_run())
 
 
-run_task(main())
+async def color_detection_task():
+    while True:
+        # await ilan.color_sensor.color()
+        color = ilan.color_sensor.color()
+
+            # Print the measured color and reflection.
+        print(await ilan.color_sensor.hsv%())
+
+            # Move the sensor around and see how
+            # well you can detect colors.
+
+            # Wait so we can read the value.
+        await wait(1000)
+
+    
+
+run_task(color_detection_task())

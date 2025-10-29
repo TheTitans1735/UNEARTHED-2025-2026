@@ -19,5 +19,22 @@
                 "PYTHONUTF8": "1"
             }
         },
+        {
+            "name": "Run yahav",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pybricksdev",
+            "args": [
+                "run",
+                "ble",
+                "--name",
+                "YAHAV",
+                "ilan.py"
+            ],
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONUTF8": "1"
+            }
+        },
     ]
 }
