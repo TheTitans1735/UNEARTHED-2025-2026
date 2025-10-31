@@ -34,13 +34,13 @@ class Robot:
                 self.xbox.rumble(70)
 
             if Button.A in pressed:
-                self.motor_back.run(100)
+                self.motor_back.run(1000)
             elif Button.B in pressed:
-                self.motor_back.run(-100)
+                self.motor_back.run(-1000)
             elif Button.X in pressed:
-                self.motor_front.run(100)
+                self.motor_front.run(500)
             elif Button.Y in pressed:
-                self.motor_front.run(-100)
+                self.motor_front.run(-500)
             elif Button.A not in pressed and Button.B not in pressed and Button.X not in pressed and Button.Y not in pressed:
                 self.motor_back.stop()
                 self.motor_front.stop()
