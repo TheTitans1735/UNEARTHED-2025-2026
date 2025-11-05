@@ -44,6 +44,7 @@ class Robot:
             elif Button.A not in pressed and Button.B not in pressed and Button.X not in pressed and Button.Y not in pressed:
                 self.motor_back.stop()
                 self.motor_front.stop()
+            
                 
             # if 10 < right_trigger <= 30:
             #     self.drive_base.drive(50, 0)  
@@ -74,7 +75,7 @@ class Robot:
             
             # elif left_trigger <= 10:
             #     self.drive_base.stop()
-                
+
             
                 
             if abs(x) < DEADZONE and abs(y) < DEADZONE:
@@ -91,10 +92,16 @@ class Robot:
             
             else:
                 # Normal driving, maybe less sensitive turn
-                speed = int(y * 2)
+                speed = int(y * 1)
                 turn = int(x * 1)
                 self.drive_base.drive(speed, turn)
 
             wait(1)  # להמתין קצת לפני הקריאה הבאה
 
+            if 0.800< self.force_sensor.distance() < 1.200:
+                self.left_motor.stop()
+                self.right_motor.stop()
+
+                print(self.force_sensor.distance())
+            wait(100)
 Robot().run()

@@ -293,11 +293,13 @@ class Robot:
         
     async def run_until_force_touched(self, speed=750):
         self.drive_base.drive(speed, 0)
-        while not await self.force_sensor.touched():
+        if 0.800< self.force_sensor.distance() < 1.200:
+            self.left_motor.stop()
+            self.right_motor.stop()
             await wait(10)
-        self.drive_base.stop()
-        self.motor_front.stop()
-        self.motor_back.stop()
+        # self.drive_base.stop()
+        # self.motor_front.stop()
+        # self.motor_back.stop()
         
     # async def detect_color_and_run(self):
     #     while True:

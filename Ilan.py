@@ -20,11 +20,12 @@ async def detect_color_and_run():
         detected_color = ilan.color_sensor.color()
         await wait(100)
 
-        if detected_color == Color.CYAN:
+        if detected_color == Color.BLUE:
             ilan.hub.display.icon(Icon.TRIANGLE_LEFT)
             while True:
                 if Button.BLUETOOTH in ilan.hub.buttons.pressed():
                     # כאן תפעיל פונקציה מתאימה
+                    await ilan.drive_until_touched(speed=100)
                     break
 
         elif detected_color == Color.GRAY:
@@ -120,7 +121,7 @@ async def color_detection_task():
         color = ilan.color_sensor.color()
 
             # Print the measured color and reflection.
-        print(await ilan.color_sensor.hsv%())
+        # print(await ilan.color_sensor.hsv%())
 
             # Move the sensor around and see how
             # well you can detect colors.
@@ -130,4 +131,4 @@ async def color_detection_task():
 
     
 
-run_task(color_detection_task())
+run_task(main_loop)
