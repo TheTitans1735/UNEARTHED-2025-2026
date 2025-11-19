@@ -110,6 +110,13 @@ class Robot:
         self.motor_front.reset_angle(0)
         await self.motor_front.run_target(speed, angle, then=Stop.HOLD, wait=wait)
 
+    
+    async def run_front_motor_fast(self, duty=100, time_seconds=1.0, should_wait=True):
+        self.motor_front.dc(duty)
+        if should_wait==True:
+            await wait(time_seconds * 1000)
+            self.motor_front.stop()
+
     async def run_back_motor(self, speed, angle, wait=True):
         self.motor_back.reset_angle(0)
         await self.motor_back.run_target(speed, angle, then=Stop.HOLD, wait=wait)
@@ -120,7 +127,7 @@ class Robot:
         self.hub.light.blink(Color.MAGENTA, [1000])
         while not self.hub.buttons.pressed():
             await wait(10)
-        self.buttery_status()
+        self.battery_status()
 
     async def drive_straight(self, distance_cm,
                              target_speed=1000, 

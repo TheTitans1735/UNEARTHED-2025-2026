@@ -36,5 +36,39 @@
                 "PYTHONUTF8": "1"
             }
         },
+        {
+            "name": "Ilan manual_control",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pybricksdev",
+            "args": [
+                "run",
+                "ble",
+                "--name",
+                "ilan prime",
+                "manual_control.py"
+            ],
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONUTF8": "1"
+            }
+        },
+        {
+            "name": "Run Ilan",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pybricksdev",
+            "args": [
+                "run",
+                "ble",
+                "--name",
+                "ilan prime",
+                "ilan.py"
+            ],
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONUTF8": "1"
+            }
+        },
     ]
 }
