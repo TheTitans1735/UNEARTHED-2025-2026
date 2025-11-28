@@ -103,7 +103,7 @@ class Robot:
         elif voltage > 7000:
             self.hub.light.blink(Color.ORANGE, [1000])
         else:
-            self.hub.light.blink(Color.RED, [1000])
+            self.hub.light.blink(Color.RED, [1000]) 
 
     async def run_front_motor(self, speed, angle, wait=True):
         speed = 110

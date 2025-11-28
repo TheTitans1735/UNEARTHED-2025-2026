@@ -183,6 +183,7 @@ async def main_loop():
         if buttery_status_timer.time() > 10000:
             await ilan.battery_status()
             buttery_status_timer.reset()
+    
 
 async def main():
     while True:
@@ -205,4 +206,4 @@ async def color_detection_task():
 
     
 
-run_task(main_loop)
+run_task(main_loop())
