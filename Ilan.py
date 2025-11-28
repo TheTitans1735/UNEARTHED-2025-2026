@@ -19,13 +19,14 @@ async def ritsatMaavar():
     debug=True
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(33, 750) # יציאה מהבית הכחול למשימה 8
+    await ilan.wait_for_button(debug=False)
+    await ilan.run_front_motor_fast(100, 0.5) # ביצוע משימה 8
     await ilan.wait_for_button(debug)
-    
-    await ilan.run_front_motor_fast(100, 3) # ביצוע משימה 8
+    await ilan.run_front_motor(-1500, -150)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(5000, -800)
+    await ilan.run_front_motor_fast(100, 0.5)
     await ilan.wait_for_button(debug)
-
+    await ilan.run_front_motor(-1500, -150)
     await ilan.turn(-50) # הגעה ממשימה 8 למשימה 9
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(28,800)
@@ -87,12 +88,51 @@ async def forum():
     await ilan.wait_for_button(debug)
     await ilan.run.front_motor(700, -70)
 
+
+async def unearth():
+    debug=True
+    await ilan.drive_base(-10, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(-74, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_base(15, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(8, 125)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(-24, 125)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_base(-7, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(9, 125)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_base(13, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.motor_front.run_until_stalled(800, Direction.COUNTERCLOCKWISE)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(-133, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_base(-7, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.run_back_motor.until_stalled(800, Direction.COUNTERCLOCKWISE)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(5, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.run_back_motor.until_stalled(800, Direction.CLOCKWISE)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-3, 500)
+    await ilan.wait_for_button(debug)
+    ## לא גמור
+
+
+
 async def detect_color_and_run():
         print("Starting color detection...")
         #await forum()
         detected_color = await ilan.color_sensor.color()
-        print(detected_color)
-        await wait(100)
+        while detected_color != None:
+            detected_color = await ilan.color_sensor.color()
+            print(detected_color)
+            await wait(5000)
 
         if detected_color == Color.BLUE:
             ilan.hub.display.icon(Icon.TRIANGLE_LEFT)
@@ -116,10 +156,10 @@ async def detect_color_and_run():
                     await ritsatMaavar()
                     break
         elif detected_color == Color.WHITE:
-            ilan.hub.display.icon(Icon.PAUSE)
+            ilan.hub.display.icon(Icon.EYE_RIGHT)
             while True:
                 if Button.BLUETOOTH in ilan.hub.buttons.pressed():
-                    await "funk()"
+                    await unearth()
                     break
 
         elif detected_color == Color.RED:
