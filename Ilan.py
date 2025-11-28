@@ -119,7 +119,7 @@ async def detect_color_and_run():
             ilan.hub.display.icon(Icon.EYE_RIGHT)
             while True:
                 if Button.BLUETOOTH in ilan.hub.buttons.pressed():
-                    await unearth()
+                    await "funk()"
                     break
 
         elif detected_color == Color.RED:
