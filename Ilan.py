@@ -1,3 +1,6 @@
+
+
+
 from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import Motor, ColorSensor, ForceSensor
 from pybricks.robotics import DriveBase
@@ -14,23 +17,63 @@ async def stop_all():
     ilan.drive_base.stop()
     ilan.motor_back.stop()
     ilan.motor_front.stop()
-    
+
+async def unearth():
+    debug=True
+    await ilan.drive_straight(-50, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(65)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(15, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(-10)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(26)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-10, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(-9)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(13, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.motor_front.run_until_stalled(-400)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(-133)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-7, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.motor_back.run_until_stalled(-400)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-5)
+    await ilan.wait_for_button(debug)
+    await ilan.motor_back.run_until_stalled(400)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-3)
+
 async def ritsatMaavar():
     debug=True
-    await ilan.wait_for_button(debug)
-    await ilan.drive_straight(33, 750) # יציאה מהבית הכחול למשימה 8
-    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(34, 750) # יציאה מהבית הכחול למשימה 8
     
-    await ilan.run_front_motor_fast(100, 3) # ביצוע משימה 8
-    await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(5000, -800)
+    await ilan.run_front_motor_fast(100, 0.5) # ביצוע משימה 8
+    await ilan.run_front_motor(500, -300)
+    await ilan.run_front_motor_fast(100, 0.5)
+    await ilan.run_front_motor(500, -300)
+
+    await ilan.drive_straight(-10, 500)
     await ilan.wait_for_button(debug)
 
     await ilan.turn(-50) # הגעה ממשימה 8 למשימה 9
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(28,800)
+    await ilan.drive_straight(28.5,800)
     await ilan.wait_for_button(debug)
-    await ilan.turn(-10)
+    await ilan.run_front_motor_fast(50, 0.2)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-17, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(2, 500)
+    await ilan.run_front_motor(500, -50)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-10, 500)
 
     await ilan.wait_for_button(debug) # ביצוע משימה 9
     await ilan.run_back_motor(5000,800)
@@ -65,7 +108,36 @@ async def discover():
   await ilan.turn(-9)
   await ilan.drive_straight
   # לא גמור
+async def elephent():
+    # "יוצא מבית כחול מבצע משימות 6 7 15 חוזר לבית אדום
+    debug=True
 
+    # await ilan.wait_for_button(debug)
+    await ilan.drive_straight(39, 1000)
+    # await ilan.wait_for_button(debug)
+    await ilan.turn(-25)
+    # await ilan.wait_for_button(debug)
+    await ilan.drive_straight(30, 500)
+    # await ilan.wait_for_button(debug)
+    await ilan.turn(65)
+    # await ilan.wait_for_button(debug)
+    await ilan.drive_straight(18, 500)
+    # await ilan.wait_for_button(debug)
+    await ilan.turn(-19)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(16)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_until_button(500)
+    await ilan.wait_for_button(debug)
+    await ilan.run_front_motor(-200, -270)
+    await ilan.wait_for_button(debug)
+    await ilan.motor_front.run_until_stalled(400)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-20, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(110)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(65)
 async def forum():
     debug=True
     await ilan.wait_for_button(debug)
@@ -99,7 +171,7 @@ async def detect_color_and_run():
             while True:
                 if Button.BLUETOOTH in ilan.hub.buttons.pressed():
                     # כאן תפעיל פונקציה מתאימה
-                    await ilan.drive_until_touched(speed=100)
+                    await elephent()
                     break
 
         elif detected_color == Color.GRAY:
@@ -113,13 +185,13 @@ async def detect_color_and_run():
             ilan.hub.display.icon(Icon.SAD)
             while True:
                 if Button.BLUETOOTH in ilan.hub.buttons.pressed():  
-                    await "funk()"
+                    await ritsatMaavar()
                     break
         elif detected_color == Color.WHITE:
-            ilan.hub.display.icon(Icon.EYE_RIGHT)
+            ilan.hub.display.icon(Icon.PAUSE)
             while True:
                 if Button.BLUETOOTH in ilan.hub.buttons.pressed():
-                    await "funk()"
+                    await unearth()
                     break
 
         elif detected_color == Color.RED:
@@ -127,6 +199,13 @@ async def detect_color_and_run():
             while True:
                 if Button.BLUETOOTH in ilan.hub.buttons.pressed():
                     await "funk()"
+                    break
+        
+        elif detected_color == Color.BLACK:
+            ilan.hub.display.icon(Icon.CIRCLE)
+            while True:
+                if Button.BLUETOOTH in ilan.hub.buttons.pressed():
+                    await forum()
                     break
 
 
@@ -149,33 +228,34 @@ async def monitor_roll():
         await wait(50)
 
 async def main_loop():
-    runs = [
-        # --- משימות עיקריות ---
-        ("0", "funk",         Icon.TRIANGLE_UP),
-        ("1", "funk",         Icon.LEFT),
-        ("2", "funk",         Icon.FALSE),
-        ("3", "funk",         Icon.HAPPY),
-        ("4", "funk",         Icon.SAD),
-        ("5", "funk",         Icon.PAUSE),
-        ("7", "funk",         Icon.FULL),
-        ("8", "funk",         Icon.HEART),
+    # runs = [
+    #     # --- משימות עיקריות ---
+    #     ("0", "funk",         Icon.TRIANGLE_UP),
+    #     ("1", "funk",         Icon.LEFT),
+    #     ("2", "funk",         Icon.FALSE),
+    #     ("3", "funk",         Icon.HAPPY),
+    #     ("4", "funk",         Icon.SAD),
+    #     ("5", "funk",         Icon.PAUSE),
+    #     ("7", "funk",         Icon.FULL),
+    #     ("8", "funk",         Icon.HEART),
 
-        # --- פעולות נהיגה ---
-        (" ", "funk",        Icon.ARROW_LEFT),
-        (" ", "funk",        Icon.ARROW_RIGHT),
-        (" ", "funk",        Icon.ARROW_LEFT_DOWN),
-        (" ", "funk",        Icon.ARROW_LEFT_UP),
-        (" ", "funk",        Icon.CLOCKWISE),
+    #     # --- פעולות נהיגה ---
+    #     (" ", "funk",        Icon.ARROW_LEFT),
+    #     (" ", "funk",        Icon.ARROW_RIGHT),
+    #     (" ", "funk",        Icon.ARROW_LEFT_DOWN),
+    #     (" ", "funk",        Icon.ARROW_LEFT_UP),
+    #     (" ", "funk",        Icon.CLOCKWISE),
 
-        # --- שליטה במנועים ---
-        ("1", "funk"),
-        ("2", "funk"),
-        ("3", "funk"),
-        ("4", "funk"),
+    #     # --- שליטה במנועים ---
+    #     ("1", "funk"),
+    #     ("2", "funk"),
+    #     ("3", "funk"),
+    #     ("4", "funk"),
 
-        # --- בדיקות ופיתוח ---
-        ("T", detect_color_and_run),
-    ]
+    #     # --- בדיקות ופיתוח ---
+    #     ("T", detect_color_and_run),
+    # ]
+    await detect_color_and_run()
 
     await ilan.battery_status()
     buttery_status_timer = StopWatch()
@@ -183,11 +263,10 @@ async def main_loop():
         if buttery_status_timer.time() > 10000:
             await ilan.battery_status()
             buttery_status_timer.reset()
-    
-
-async def main():
-    while True:
-        await multitask(monitor_roll(), detect_color_and_run())
+        
+# async def main():
+#     while True:
+#         await multitask(detect_color_and_run())
 
 
 async def color_detection_task():
