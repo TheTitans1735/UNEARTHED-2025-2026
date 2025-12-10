@@ -57,7 +57,7 @@ async def unearth():
     await ilan.drive_straight(60,700) #חזרה לבית הלבן
 async def ritsatMaavar():
     debug=False
-    await ilan.drive_straight(34, 600) # יציאה מהבית הכחול למשימה 8
+    await ilan.drive_straight(34, 700) # יציאה מהבית הכחול למשימה 8
     
     await ilan.run_front_motor_fast(100, 0.2) # ביצוע משימה 8
     await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
@@ -73,22 +73,40 @@ async def ritsatMaavar():
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(33,800)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor_fast (50, 0.2)
+    await ilan.run_front_motor_fast (50, 0.25)
     await ilan.wait_for_button(debug)
+
     await ilan.drive_straight(-17, 500)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor_fast (-50, 0.05)
-    await ilan.drive_straight(0.5, 500)
+    await ilan.run_front_motor_fast (-60, 0.1)
+    # await ilan.drive_straight(0.5, 500)
     await ilan.run_front_motor(500, -50)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-10, 500)
     await ilan.wait_for_button(debug) # ביצוע משימה 9
     await ilan.run_front_motor(300,90)
-    await ilan.drive_straight(5,200)
+    await ilan.drive_straight(2,200)
     await ilan.wait_for_button(debug)
-    await ilan.turn(-45)
+    await ilan.turn(-40)
     await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
-    await ilan.drive_straight(10,500)
+    # await ilan.drive_straight(10,500)
+    debug=True
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(48,500)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(90)
+    await ilan.wait_for_button(debug)
+    await ilan.run_front_motor_fast (50, 0.25)
+    await ilan.wait_for_button(debug)
+    await ilan.run_front_motor_fast (-50, 0.25)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(-100)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(2,250)
+    await ilan.wait_for_button(debug)
+    await ilan.motor_back.run_until_stalled(400)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(50,700)
     # await ilan.wait_for_button(debug)
     # await ilan.run_front_motor(5000,-800)
     # await ilan.wait_for_button(debug)
@@ -125,7 +143,7 @@ async def elephent():
     debug=False
 
     # await ilan.wait_for_button(debug)
-    await ilan.drive_straight(39, 1000)
+    await ilan.drive_straight(39, 700)
     # await ilan.wait_for_button(debug)
     await ilan.turn(-25)
     # await ilan.wait_for_button(debug)
@@ -138,12 +156,12 @@ async def elephent():
     # await ilan.wait_for_button(debug=True)
     await ilan.turn(-32)
     # await ilan.wait_for_button(debug=True)
-    await ilan.turn(20)
+    await ilan.turn(14)
     # await ilan.wait_for_button(debug=True)
     # await ilan.drive_until_touch(200)
     await ilan.drive_straight(1, 200)
     # await ilan.wait_for_button(debug=True)
-    await ilan.run_front_motor(-200, -210)
+    await ilan.run_front_motor(-200, -240)
     await ilan.wait_for_button(debug)
     await ilan.run_front_motor(200, 200)
     await ilan.wait_for_button(debug)
@@ -254,7 +272,7 @@ async def detect_color_and_run():
             while True:
                 if Button.LEFT in ilan.hub.buttons.pressed():
                     # כאן תפעיל פונקציה מתאימה
-                    await elephent()
+                    await skeleton()
                     break
 
         elif detected_color == Color.GRAY:
