@@ -104,4 +104,6 @@ class Robot:
 
                 print(self.force_sensor.distance())
             wait(100)
+
+    
 Robot().run()

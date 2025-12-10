@@ -232,15 +232,21 @@ async def detect_color_and_run():
                     # כאן תפעיל פונקציה מתאימה
                     await elephent()
                     break
-                elif Button.LEFT in ilan.hub.buttons.pressed():
-                    await skeleton()
+        elif detected_color == Color.BLUE:
+            ilan.hub.display.icon(Icon.TRIANGLE_LEFT)
+            while True:
+                if Button.LEFT in ilan.hub.buttons.pressed():
+                    # כאן תפעיל פונקציה מתאימה
+                    await elephent()
                     break
+
         elif detected_color == Color.GRAY:
             ilan.hub.display.icon(Icon.SQUARE)
             while True:
                 if Button.BLUETOOTH in ilan.hub.buttons.pressed():
                     await forum()
                     break
+
         elif detected_color == Color.YELLOW:
             ilan.hub.display.icon(Icon.SAD)
             while True:
