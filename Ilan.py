@@ -186,23 +186,26 @@ async def cave():
     #יוצא מהבית האדום ועושה את משימות 3 ו-4
     debug=True
     # await ilan.wait_for_button(debug)
-    await ilan.drive_straight2(100, 1000) 
-    multitask(await ilan.run_back_motor(100,100)
-    ,await ilan.drive_straight2(100, 1000))
+    await multitask(ilan.drive_straight2(100, 1000), ilan.run_back_motor(500,-1000))
+    # await ilan.wait_for_button(debug) 
+    # await ilan.run_back_motor(100,100)
+    # await ilan.wait_for_button(debug)
+    # await ilan.drive_straight2(100, 1000)
+    await ilan.wait_for_button(debug)
     # await ilan.drive_until_button(200)
     # await ilan.wait_for_button(debug)
     await ilan.drive_until_touch(250)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-3, 700)
     await ilan.wait_for_button(debug)
-    multitask(await ilan.run_back_motor(100,100),    await ilan.turn(90, 150))
+    await multitask(ilan.run_back_motor(100,100), ilan.turn(90, 150))
     # await ilan.turn(90, 150)
     await ilan.wait_for_button(debug)
     await ilan.run_front_motor(500, 230) # הגעה למשימות 3 ו-4
     # await ilan.run_front_motor(500, -90)
 
     await ilan.wait_for_button(debug)
-    multitask(await ilan.run_back_motor(100,200),    await ilan.drive_straight(22.5, 75))
+    await multitask(await ilan.run_back_motor(100,200),    await ilan.drive_straight(22.5, 75))
     # await ilan.drive_straight(22.5, 75)
     await ilan.wait_for_button(debug)
     await ilan.run_front_motor(100, 0.5) # ביצוע משימות 3 ו-4
@@ -216,6 +219,20 @@ async def cave():
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(85, 700) #חזרה לבית האדום
 
+async def ship():
+    debug=True
+    await ilan.drive_straight(45, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.run_front_motor(500, 180)
+    await ilan.run_back_motor(300, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-11, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.run_front_motor(500, -180)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(20, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-59, 500)
 
 
 async def detect_color_and_run():
@@ -269,7 +286,7 @@ async def detect_color_and_run():
             ilan.hub.display.icon(Icon.TRIANGLE_LEFT)
             while True:
                 if Button.BLUETOOTH in ilan.hub.buttons.pressed():
-                    await "funk()"
+                    await ship()
                     break
         
         elif detected_color == Color.BLACK:
