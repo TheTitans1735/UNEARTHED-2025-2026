@@ -78,32 +78,33 @@ class Robot:
 
             
                 
-            if abs(x) < DEADZONE and abs(y) < DEADZONE:
-                self.drive_base.stop()
-            elif Button.LB in pressed:
-                speed = int(y * 10)
-                turn = 0
-                self.drive_base.drive(speed, turn)
+            # if abs(x) < DEADZONE and abs(y) < DEADZONE:
+            #     self.drive_base.stop()
+            # elif Button.LB in pressed:
+            #     speed = int(y * 10)
+            #     turn = 0
+            #     self.drive_base.drive(speed, turn)
 
-            elif Button.RB in pressed:
-                speed = 0
-                turn = int(x * 10)
-                self.drive_base.drive(speed, turn)
+            # elif Button.RB in pressed:
+            #     speed = 0
+            #     turn = int(x * 10)
+            #     self.drive_base.drive(speed, turn)
             
-            else:
-                # Normal driving, maybe less sensitive turn
-                speed = int(y * 1)
-                turn = int(x * 1)
-                self.drive_base.drive(speed, turn)
+            # else:
+            #     # Normal driving, maybe less sensitive turn
+            #     speed = int(y * 1)
+            #     turn = int(x * 1)
+            #     self.drive_base.drive(speed, turn)
 
-            wait(1)  # להמתין קצת לפני הקריאה הבאה
+            # wait(1)  # להמתין קצת לפני הקריאה הבאה
 
-            if 0.800< self.force_sensor.distance() < 1.200:
-                self.left_motor.stop()
-                self.right_motor.stop()
+            # if 0.800< self.force_sensor.distance() < 1.200:
+            #     self.left_motor.stop()
+            #     self.right_motor.stop()
 
-                print(self.force_sensor.distance())
-            wait(100)
+            #     print(self.force_sensor.distance())
+            # wait(100)
 
     
+            
 Robot().run()
