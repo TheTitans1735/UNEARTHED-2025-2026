@@ -145,8 +145,9 @@ async def elephent():
     # "יוצא מבית כחול מבצע משימות 6 7 15 חוזר לבית אדום
     debug=False
 
+
     # await ilan.wait_for_button(debug)
-    await ilan.drive_straight(39, 1000)
+    await ilan.drive_straight(39, 700)
     # await ilan.wait_for_button(debug)
     await ilan.turn(-25)
     # await ilan.wait_for_button(debug)
@@ -159,21 +160,20 @@ async def elephent():
     # await ilan.wait_for_button(debug=True)
     await ilan.turn(-32)
     # await ilan.wait_for_button(debug=True)
-    await ilan.turn(20)
+    await ilan.turn(14)
     # await ilan.wait_for_button(debug=True)
     # await ilan.drive_until_touch(200)
     await ilan.drive_straight(1, 200)
     # await ilan.wait_for_button(debug=True)
-    await ilan.run_front_motor(-200, -210)
+    await multitask(ilan.run_front_motor(-200, -240), wait(1500), race=True)
+    await ilan.run_front_motor(300, 100)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(200, 200)
-    await ilan.wait_for_button(debug)
-    # await ilan.drive_straight(4, 500)
     await ilan.drive_straight(-19, 1000)
     await ilan.wait_for_button(debug)
     await ilan.turn(110,500)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(65,1000,gradual_stop=False)
+
 
 async def forum():
     debug=True
