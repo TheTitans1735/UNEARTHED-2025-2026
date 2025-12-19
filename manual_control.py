@@ -22,28 +22,28 @@ class Robot:
         self.xbox = XboxController()
 
     def run(self):
-         # אזור מת מתחת לערך זה
-        while True:
-            left_trigger, right_trigger = self.xbox.triggers()
-            pressed = self.xbox.buttons.pressed()
-            x, y = self.xbox.joystick_left()  # X = שמאל/ימין, Y = קדימה/אחורה
-            # print(f"Joystick: x={x}, y={y}, Right Trigger={right_trigger}, Buttons={pressed}")
-    # אם הג'ויסטיק כמעט במרכז -> עצור
+    #      # אזור מת מתחת לערך זה
+    #     while True:
+    #         left_trigger, right_trigger = self.xbox.triggers()
+    #         pressed = self.xbox.buttons.pressed()
+    #         x, y = self.xbox.joystick_left()  # X = שמאל/ימין, Y = קדימה/אחורה
+    #         # print(f"Joystick: x={x}, y={y}, Right Trigger={right_trigger}, Buttons={pressed}")
+    # # אם הג'ויסטיק כמעט במרכז -> עצור
 
-            if self.force_sensor.pressed():
-                self.xbox.rumble(70)
+    #         if self.force_sensor.pressed():
+    #             self.xbox.rumble(70)
 
-            if Button.A in pressed:
-                self.motor_back.run(1000)
-            elif Button.B in pressed:
-                self.motor_back.run(-1000)
-            elif Button.X in pressed:
-                self.motor_front.run(500)
-            elif Button.Y in pressed:
-                self.motor_front.run(-500)
-            elif Button.A not in pressed and Button.B not in pressed and Button.X not in pressed and Button.Y not in pressed:
-                self.motor_back.stop()
-                self.motor_front.stop()
+    #         if Button.A in pressed:
+    #             self.motor_back.run(1000)
+    #         elif Button.B in pressed:
+    #             self.motor_back.run(-1000)
+    #         elif Button.X in pressed:
+    #             self.motor_front.run(500)
+    #         elif Button.Y in pressed:
+    #             self.motor_front.run(-500)
+    #         elif Button.A not in pressed and Button.B not in pressed and Button.X not in pressed and Button.Y not in pressed:
+    #             self.motor_back.stop()
+    #             self.motor_front.stop()
             
                 
             # if 10 < right_trigger <= 30:
@@ -74,7 +74,7 @@ class Robot:
             #     self.drive_base.drive(-300, 0)      
             
             # elif left_trigger <= 10:
-            #     self.drive_base.stop()
+            # #     self.drive_base.stop()
 
             
                 
@@ -105,6 +105,7 @@ class Robot:
             #     print(self.force_sensor.distance())
             # wait(100)
 
+        self.drive_base.straight(500)
     
             
 Robot().run()
