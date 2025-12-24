@@ -203,7 +203,7 @@ async def skeleton():
     await ilan.drive_straight(35,700)
     await ilan.motor_front.run_until_stalled(200)
     await ilan.drive_straight(2.67,700)
-    await ilan.run_front_motor_fast(-500,0.4)    
+    await ilan.run_front_motor_fast(-100)    
 
 async def cave():
     #יוצא מהבית האדום ועושה את משימות 3 ו-4
@@ -221,7 +221,7 @@ async def cave():
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-3, 700)
     await ilan.wait_for_button(debug)
-    await ilan.turn(90, 150)
+    await ilan.turn(86.5, 150)
     await ilan.wait_for_button(debug)
     await ilan.motor_front.run_time(300, 1600)
     # await ilan.turn(90, 150)
@@ -234,7 +234,7 @@ async def cave():
     await ilan.wait_for_button(debug)
     await ilan.motor_back.run_time(500, 4000)
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(22.5, 75)
+    await ilan.drive_straight(9, 75)
     # await ilan.drive_straight(22.5, 75)
     await ilan.wait_for_button(debug)
     await ilan.run_front_motor(100, 0.5) # ביצוע משימות 3 ו-4
