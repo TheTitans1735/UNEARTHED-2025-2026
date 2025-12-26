@@ -75,7 +75,7 @@ async def ritsatMaavar():
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(33,800)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor_fast (50, 0.25)
+    await ilan.run_front_motor_fast (50, 0.35)
     await ilan.wait_for_button(debug)
 
     await ilan.drive_straight(-17, 500)
@@ -166,7 +166,7 @@ async def elephent():
     # await ilan.wait_for_button(debug=True)
     await ilan.run_front_motor(-200, -210)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(200, 200)
+    await ilan.run_front_motor(200, 240)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-19, 1000)
     await ilan.wait_for_button(debug)
@@ -277,6 +277,56 @@ async def detect_color_and_run():
         print(detected_color)
         await wait(100)
 
+        # match detected_color:
+
+        #     case Color.BLUE:
+        #         ilan.hub.display.icon(Icon.TRIANGLE_LEFT)
+        #         while True:
+        #             if Button.BLUETOOTH in ilan.hub.buttons.pressed():
+        #                 # כאן תפעיל פונקציה מתאימה
+        #                 await elephent()
+        #                 break
+        #             else: Button.LEFT in ilan.hub.buttons.pressed()
+        #                 # כאן תפעיל פונקציה מתאימה
+        #             await skeleton()
+        #             break
+        #     case Color.GRAY:
+        #         ilan.hub.display.icon(Icon.SQUARE)
+        #         while True:
+        #             if Button.BLUETOOTH in ilan.hub.buttons.pressed():
+        #                 await forum()
+        #                 break
+        #     case Color.YELLOW:
+        #         ilan.hub.display.icon(Icon.SAD)
+        #         while True:
+        #             if Button.BLUETOOTH in ilan.hub.buttons.pressed():  
+        #                 await ritsatMaavar()
+        #                 break
+        #     case Color.WHITE:
+        #         ilan.hub.display.icon(Icon.PAUSE)
+        #         while True:
+        #             if Button.BLUETOOTH in ilan.hub.buttons.pressed():
+        #                 await unearth()
+        #                 break
+        #             elif Button.LEFT in ilan.hub.buttons.pressed():
+        #                 await skeleton()
+        #                 break
+        #             else: Button.RIGHT in ilan.hub.buttons.pressed()
+        #             await cave()
+        #             break
+        #     case Color.RED:
+        #         ilan.hub.display.icon(Icon.TRIANGLE_LEFT)
+        #         while True:
+        #             if Button.BLUETOOTH in ilan.hub.buttons.pressed():
+        #                 await ship()
+        #                 break
+        #     case Color.BLACK:
+        #         ilan.hub.display.icon(Icon.CIRCLE)
+        #         while True:
+        #             if Button.BLUETOOTH in ilan.hub.buttons.pressed():
+        #                 await forum()
+        #                 break
+
         if detected_color == Color.BLUE:
             ilan.hub.display.icon(Icon.TRIANGLE_LEFT)
             while True:
@@ -330,7 +380,7 @@ async def detect_color_and_run():
                 if Button.BLUETOOTH in ilan.hub.buttons.pressed():
                     await forum()
                     break
-
+        
 async def test():
     ilan.drive_straight(85)
 
