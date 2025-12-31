@@ -204,13 +204,17 @@ async def skeleton():
     await ilan.wait_for_button(debug)
     await ilan.motor_front.run_until_stalled(200)
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(1.5,700)
+    await ilan.drive_straight(1.6,700)
     await ilan.wait_for_button(debug)
     # await ilan.run_front_motor_fast(-100, 0.3)
     # await ilan.wait_for_button(debug)
     # await ilan.drive_straight(1,100,gradual_stop=False,gradtual_start=False)
-    await ilan.wait_for_button(debug)
-    await ilan.run_front_motor_fast(-100, 0.3)
+    await ilan.run_front_motor_fast(-100, 1)
+    # await ilan.wait_for_button(debug)
+    # 
+    # await ilan.run_front_motor(500, -20)
+    # await ilan.wait_for_button(debug)
+    # await multitask(ilan.drive_straight(5, 100), ilan.run_front_motor(500, -20))
 
 
 async def cave():
@@ -220,14 +224,13 @@ async def cave():
     await multitask(ilan.drive_straight2(100, 1000), ilan.run_front_motor(500, -180))
     # await ilan.wait_for_button(debug) 
     # await ilan.run_back_motor(100,100)
-    # await ilan.wait_for_button(debug)
-    # await ilan.drive_straight2(100, 1000)
     await ilan.wait_for_button(debug)
+    # await ilan.drive_straight2(100, 1000)
     # await ilan.drive_until_button(200)
     # await ilan.wait_for_button(debug)
     await ilan.drive_until_touch(250)
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(-3, 700)
+    await ilan.drive_straight(-3, 150)
     await ilan.wait_for_button(debug)
     await ilan.turn(86.5, 150)
     await ilan.wait_for_button(debug)
@@ -277,7 +280,7 @@ async def detect_color_and_run():
         print(detected_color)
         await wait(100)
 
-        # match detected_color:
+        #  match detected_color:
 
         #     case Color.BLUE:
         #         ilan.hub.display.icon(Icon.TRIANGLE_LEFT)
