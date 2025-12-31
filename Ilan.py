@@ -56,6 +56,15 @@ async def unearth():
     await ilan.turn(67)
     await ilan.drive_straight(60,700) #חזרה לבית0 0הלבן
 
+
+# async def mamgura():
+    await ilan.drive_straight(54,700)
+    await ilan.run_front_motor_fast(100, 0.3) # ביצוע משימה 8
+    await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
+    await ilan.run_front_motor_fast(100, 0.3)
+    await ilan.run_front_motor_fast(-100, 0.35)
+    await ilan.run_front_motor_fast(100, 0.3)
+    await ilan.run_front_motor_fast(-100, 0.35)
   
 async def ritsatMaavar():
     debug=False
@@ -71,25 +80,26 @@ async def ritsatMaavar():
     await ilan.drive_straight(-12, 500)
     await ilan.wait_for_button(debug)
 
-    await ilan.turn(-53) # הגעה ממשימה 8 למשימה 9
+    await ilan.turn(-51) # הגעה ממשימה 8 למשימה 9
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(33,800)
+    await ilan.drive_straight(35,800)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor_fast (50, 0.35)
+    await ilan.run_front_motor_fast (50, 1)
     await ilan.wait_for_button(debug)
 
-    await ilan.drive_straight(-17, 500)
+    await ilan.drive_straight(-20, 500)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor_fast (-60, 0.1)
+    await ilan.drive_straight(1.5, 200)
+    await ilan.run_front_motor_fast (-60, 0.5)
     # await ilan.drive_straight(0.5, 500)
-    await ilan.run_front_motor(500, -50)
+    # await ilan.run_front_motor(500, -50)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-10, 500)
     await ilan.wait_for_button(debug) # ביצוע משימה 9
-    await ilan.run_front_motor(300,90)
-    await ilan.drive_straight(2,200)
+    await ilan.run_front_motor_fast(60, 0.7)
+    await ilan.drive_straight(1.5,200)
     await ilan.wait_for_button(debug)
-    await ilan.turn(-40)
+    await ilan.turn(-40, 170)
     await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
     # await ilan.drive_straight(10,500)
     debug=True
@@ -98,11 +108,12 @@ async def ritsatMaavar():
     await ilan.wait_for_button(debug)
     await ilan.turn(90)
     await ilan.wait_for_button(debug)
+    await ilan.drive_straight(4,500)
     await ilan.run_front_motor_fast (50, 0.25)
     await ilan.wait_for_button(debug)
     await ilan.run_front_motor_fast (-50, 0.25)
     await ilan.wait_for_button(debug)
-    await ilan.turn(-100)
+    await ilan.turn(-130)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(2,250)
     await ilan.wait_for_button(debug)
