@@ -272,16 +272,17 @@ async def ship():
     debug=True
     await ilan.drive_straight(58, 500)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(400, 180)
-    await ilan.run_back_motor(400, 1000)
+    await ilan.run_front_motor(speed=400, angle=180)
+    await ilan.wait_for_button(debug)
+    await ilan.run_back_motor_fast(100, 5.1)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-11, 500)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(500, -180)
+    await ilan.run_front_motor(800, -180)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(20, 500)
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(-59, 500)
+    await ilan.drive_straight(-69, 800)
 
 
 async def detect_color_and_run():

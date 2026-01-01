@@ -117,6 +117,12 @@ class Robot:
             await wait(time_seconds * 1000)
             self.motor_front.stop()
 
+    async def run_back_motor_fast(self, duty=100, time_seconds=1.0, should_wait=True):
+        self.motor_back.dc(duty)
+        if should_wait==True:
+            await wait(time_seconds * 1000)
+            self.motor_back.stop() 
+
     async def run_back_motor(self, speed, angle, wait=True):
         self.motor_back.reset_angle(0)
         await self.motor_back.run_target(speed, angle, then=Stop.HOLD, wait=wait)
