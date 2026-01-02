@@ -317,10 +317,10 @@ class Robot:
         self.drive_base.stop()
         self.motor_front.stop()
         self.motor_back.stop()
-        
-    async def run_until_force_touched(self, speed=750):
+
+    async def run_until_force_touched(self, speed=750, max_force=1.200):
         self.drive_base.drive(speed, 0)
-        if 0.800< self.force_sensor.distance() < 1.200:
+        if 0.800 < self.force_sensor.distance() < max_force:
             self.left_motor.stop()
             self.right_motor.stop()
             await wait(10)
