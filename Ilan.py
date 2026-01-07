@@ -284,11 +284,11 @@ async def cave():
     await ilan.drive_straight(85, 700) #חזרה לבית האדום
 
 async def ship():
-    await ilan.drive_straight(68, 500)
+    await ilan.drive_straight(67, 500)
     await ilan.run_front_motor(speed=400, angle=180)
     await ilan.run_back_motor_fast(100, 5.1)
     await ilan.drive_straight(-11, 500)
-    await ilan.run_front_motor(800, -180)
+    await ilan.run_front_motor(800, -280)
     await ilan.drive_straight(20, 500)
     await ilan.drive_straight(-69, 800)
 
