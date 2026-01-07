@@ -26,13 +26,13 @@ async def unearth():
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(12, 500)
     await ilan.wait_for_button(debug)
-    await ilan.turn(-19)#פיל את פרח השושנה הימני
+    await ilan.turn(-21)#פיל את פרח השושנה הימני
     await ilan.wait_for_button(debug)
-    await ilan.turn(33)
+    await ilan.turn(37)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-11, 500)
     await ilan.wait_for_button(debug)
-    await ilan.turn(-7)
+    await ilan.turn(-8)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(11, 500)
     await ilan.wait_for_button(debug)
@@ -50,7 +50,7 @@ async def unearth():
     await ilan.motor_back.run_until_stalled(-400)
     await ilan.drive_straight(-11)
     # await ilan.motor_back.run_until_stalled(-400)
-    await ilan.drive_straight(-7)
+    await ilan.drive_straight(-3)
     await ilan.drive_straight(23,500)
     await ilan.turn(67)
     await ilan.drive_straight(60,700) #חזרה לבית0 0הלבן
@@ -68,6 +68,12 @@ async def mamgura():
     await ilan.drive_straight(20,500)
     await ilan.run_back_motor(500,90)
     await ilan.drive_straight(-5)
+    await ilan.drive_straight(5)
+    await ilan.run_back_motor(-500, 90)
+    await ilan.drive_straight(-20,500)
+    await ilan.turn(-18)
+    await ilan.drive_straight(-54,700)
+
   
 async def ritsatMaavar():
     debug=False
