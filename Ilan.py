@@ -43,7 +43,7 @@ async def unearth():
     await ilan.turn(-139)
     await ilan.drive_straight(-23, 500)
     await ilan.wait_for_button(debug)
-    await ilan.run_back_motor(500,81.67)
+    await ilan.run_back_motor(500,100)
     await ilan.drive_straight(-7,500)
     await ilan.drive_straight(3)
     await ilan.wait_for_button(debug)
@@ -106,7 +106,7 @@ async def ritsatMaavar():
     await ilan.drive_straight(-10, 500)
     await ilan.wait_for_button(debug) # ביצוע משימה 9
     await ilan.run_front_motor_fast(60, 0.7)
-    await ilan.drive_straight(3,200)
+    await ilan.drive_straight(4,200)
     await ilan.wait_for_button(debug)
     await ilan.turn(-35, 170)
     await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
