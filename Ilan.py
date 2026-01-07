@@ -106,7 +106,7 @@ async def ritsatMaavar():
     await ilan.drive_straight(-10, 500)
     await ilan.wait_for_button(debug) # ביצוע משימה 9
     await ilan.run_front_motor_fast(60, 0.7)
-    await ilan.drive_straight(4,200)
+    await ilan.drive_straight(2,200)
     await ilan.wait_for_button(debug)
     await ilan.turn(-35, 170)
     await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
@@ -117,7 +117,7 @@ async def ritsatMaavar():
     await ilan.wait_for_button(debug)
     await ilan.turn(90)
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(7,500)
+    await ilan.drive_until_touch(250)
     await ilan.run_front_motor_fast (50, 0.5)
     await ilan.wait_for_button(debug)
     await ilan.run_front_motor_fast (-50, 0.75)
@@ -130,6 +130,7 @@ async def ritsatMaavar():
     await ilan.wait_for_button(debug)
     await ilan.run_back_motor_fast(-50, 1.2)
     await ilan.wait_for_button(debug)
+    await ilan.drive_base.curve(7,95)
     # await ilan.drive_straight(50,700)
     # await ilan.wait_for_button(debug)
     # await ilan.run_front_motor(5000,-800)
