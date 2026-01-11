@@ -57,21 +57,32 @@ async def unearth():
 
 
 async def mamgura():
-    await ilan.drive_straight(54,700)
+    debug=True
+    await ilan.drive_straight(50,700)
+    await ilan.wait_for_button(debug)
     await ilan.run_front_motor_fast(100, 0.3) # ביצוע משימה 8
     await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
     await ilan.run_front_motor_fast(100, 0.3)
     await ilan.run_front_motor_fast(-100, 0.35)
     await ilan.run_front_motor_fast(100, 0.3)
     await ilan.run_front_motor_fast(-100, 0.35)
+    await ilan.wait_for_button(debug)
     await ilan.turn(18)
+    await ilan.wait_for_button(debug)
     await ilan.drive_straight(20,500)
+    await ilan.wait_for_button(debug)
     await ilan.run_back_motor(500,90)
+    await ilan.wait_for_button(debug)
     await ilan.drive_straight(-5)
+    await ilan.wait_for_button(debug)
     await ilan.drive_straight(5)
+    await ilan.wait_for_button(debug)
     await ilan.run_back_motor(-500, 90)
+    await ilan.wait_for_button(debug)
     await ilan.drive_straight(-20,500)
+    await ilan.wait_for_button(debug)
     await ilan.turn(-18)
+    await ilan.wait_for_button(debug)
     await ilan.drive_straight(-54,700)
 
   
@@ -390,6 +401,9 @@ async def detect_color_and_run():
             while True:
                 if Button.BLUETOOTH in ilan.hub.buttons.pressed():  
                     await ritsatMaavar()
+                    break
+                elif Button.RIGHT in ilan.hub.buttons.pressed():
+                    await mamgura()
                     break
         elif detected_color == Color.WHITE:
             ilan.hub.display.icon(Icon.PAUSE)
