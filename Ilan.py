@@ -275,6 +275,7 @@ async def skeleton():
 async def cave():
     #יוצא מהבית האדום ועושה את משימות 3 ו-4
     debug=False
+
     # await ilan.wait_for_button(debug)
     await multitask(ilan.drive_straight2(100, 1000), ilan.motor_front.run_until_stalled(-300))
     # await ilan.wait_for_button(debug) 
@@ -284,23 +285,24 @@ async def cave():
     # await ilan.drive_until_button(200)
     # await ilan.wait_for_button(debug)
     await ilan.drive_until_touch(250)
-    await ilan.wait_for_button(debug)
-    await ilan.drive_straight(-3, 150)
-    await ilan.wait_for_button(debug)
-    await ilan.turn(88, 150)
-    await ilan.wait_for_button(debug)
-    await multitask(ilan.motor_front.run_time(300, 1900),    ilan.motor_back.run_time(1000, 3500)) 
+    await ilan.wait_for_button(debug=True)
+    await ilan.drive_straight(-3.5, 150)
+    await ilan.wait_for_button(debug=True)
+    await ilan.turn(89, 150)
+    await ilan.wait_for_button(debug=True)
+    await multitask(ilan.motor_front.run_time(300, 1900),    ilan.motor_back.run_time(1000, 4000))
     # await ilan.turn(90, 150)
     # await ilan.wait_for_button(debug)
     # await ilan.motor_front.run_time(1000, 10) # הגעה למשימות 3 ו-4
     # await ilan.run_front_motor(500, -90)
     await ilan.wait_for_button(debug)
+
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(9, 75)
     # await ilan.drive_straight(22.5, 75)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(100, -63) # ביצוע משימות 3 ו-4
-    await ilan.motor_back.run_time(-800, 3000)
+    await ilan.run_front_motor(100, -53) # ביצוע משימות 3 ו-4
+    await ilan.motor_back.run_time(-1000, 2800)
 
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-12, 125)
@@ -309,7 +311,7 @@ async def cave():
     await ilan.wait_for_button(debug)
     await ilan.turn(90, 150)
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(80, 700) #חזרה לבית האדום
+    await ilan.drive_straight(80, 1000) #חזרה לבית האדום
 
 async def ship():
     await ilan.drive_straight(58, 500)
