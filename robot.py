@@ -154,6 +154,7 @@ class Robot:
                                 stop_at_end=True,
                                 gradual_stop=True,
                                 gradtual_start=True):
+
             acceleration_rate = target_speed / 4 if gradtual_start else target_speed
             deceleration_rate = target_speed / 3 if gradual_stop else target_speed
             
@@ -162,6 +163,26 @@ class Robot:
             self.left_motor.stop()
             self.right_motor.stop()
             self.hub.imu.reset_heading(0)
+
+    
+    async def drive_straight_without_pid(self, distance_cm,
+                                         target_speed=1000, 
+                                         stop_at_end=True,
+                                         gradual_stop=True,
+                                         gradtual_start=True):
+
+            prev_pid = self.drive_base.heading_control.pid()
+            self.drive_base.heading_control.pid(0, 0, 0) 
+
+            acceleration_rate = target_speed / 4 if gradtual_start else target_speed
+            deceleration_rate = target_speed / 3 if gradual_stop else target_speed
+            
+            self.drive_base.settings(target_speed, (acceleration_rate, deceleration_rate), None, None)
+            await self.drive_base.straight(distance_cm * 10, then=Stop.HOLD if stop_at_end else Stop.NONE, wait=True)
+            self.left_motor.stop()
+            self.right_motor.stop()
+            self.hub.imu.reset_heading(0)
+            self.drive_base.heading_control.pid(*prev_pid)
 
     async def drive_straight_with_pid_old(self, distance_cm, target_speed=300, stop_at_end=True, timeout_seconds=None, gradual_stop=True, gradtual_start=True, kp=1, ki=0, kd=0):
         pid = PIDController(kp, ki, kd)

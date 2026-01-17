@@ -208,7 +208,7 @@ async def elephent():
     await ilan.drive_straight(1, 200)
     # await ilan.wait_for_button(debug=True)
     await ilan.run_front_motor_fast(-46,1.3)
-    await ilan.run_front_motor_fast(52,1.4)
+    await ilan.run_front_motor_fast(80,0.8)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-19, 1000)
     await ilan.wait_for_button(debug)
@@ -267,6 +267,7 @@ async def skeleton():
     # await multitask(ilan.drive_straight(5, 100), ilan.run_front_motor(500, -20))
 
 
+
 async def cave():
     #יוצא מהבית האדום ועושה את משימות 3 ו-4
     debug=False
@@ -280,12 +281,12 @@ async def cave():
     # await ilan.drive_until_button(200)
     # await ilan.wait_for_button(debug)
     await ilan.drive_until_touch(250)
-    await ilan.wait_for_button(debug=True)
+    await ilan.wait_for_button(debug)
     await ilan.drive_straight(-3.5, 150)
-    await ilan.wait_for_button(debug=True)
+    await ilan.wait_for_button(debug)
     await ilan.turn(89, 150)
-    await ilan.wait_for_button(debug=True)
-    await multitask(ilan.motor_front.run_time(300, 1900),    ilan.motor_back.run_time(1000, 4000))
+    await ilan.wait_for_button(debug)
+    await multitask(ilan.motor_front.run_time(300, 1900),    ilan.motor_back.run_time(1000, 4500))
     # await ilan.turn(90, 150)
     # await ilan.wait_for_button(debug)
     # await ilan.motor_front.run_time(1000, 10) # הגעה למשימות 3 ו-4
@@ -293,10 +294,10 @@ async def cave():
     await ilan.wait_for_button(debug)
 
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(9, 75)
+    await ilan.drive_straight_with_pid_old(8, 75, kp=0,gradtual_start=False, gradual_stop=False)
     # await ilan.drive_straight(22.5, 75)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(100, -53) # ביצוע משימות 3 ו-4
+    await ilan.run_front_motor(100, -50) # ביצוע משימות 3 ו-4
     await ilan.motor_back.run_time(-1000, 2800)
 
     await ilan.wait_for_button(debug)
