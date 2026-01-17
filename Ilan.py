@@ -54,7 +54,7 @@ async def unearth():
 
 
 async def mamgura():
-    debug=True
+    debug=False
     await ilan.drive_straight(45,700)
     await ilan.wait_for_button(debug)
     await ilan.run_front_motor_fast(-85, 0.35) # ביצוע משימה 8
@@ -66,17 +66,18 @@ async def mamgura():
     await ilan.wait_for_button(debug)
     await ilan.turn(-32)
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(40,500)
+    await ilan.drive_straight(40,700)
     await ilan.wait_for_button(debug)
     await ilan.turn(-40)
+    debug=True
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(35,500)
+    await ilan.drive_straight(35,700)
     await ilan.wait_for_button(debug)
-    await ilan.turn(80)
+    await ilan.turn(70)
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(-3,500)
+    await ilan.drive_straight(-4,500)
     await ilan.wait_for_button(debug)
-    await ilan.run_back_motor(500,75)
+    await ilan.run_back_motor(500,55)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-5)
     await ilan.wait_for_button(debug)
