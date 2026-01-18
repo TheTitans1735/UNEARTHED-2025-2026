@@ -15,7 +15,18 @@ async def stop_all():
     ilan.motor_back.stop()
     ilan.motor_front.stop()
 
+async def all_test():
+    ilan.motor_front.run(1000)
+    ilan.left_motor.run(1000)
+    ilan.right_motor.run(1000)
+    ilan.motor_back.run(1000)
+    await wait(5000)
+    await stop_all()
+
 async def unearth():
+
+    # יוצא מהבית האדום ועושה את משימות 1 ו-2
+
     debug=False
     await ilan.drive_straight(-46, 750)
     await ilan.wait_for_button(debug)
@@ -23,7 +34,7 @@ async def unearth():
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(12, 700)
     await ilan.wait_for_button(debug)
-    await ilan.turn(-21, 200)#פיל את פרח השושנה הימני
+    await ilan.turn(-21, 200)#מפיל את פרח השושנה הימני
     await ilan.wait_for_button(debug)
     await ilan.turn(37,200)
     await ilan.wait_for_button(debug)
@@ -50,7 +61,7 @@ async def unearth():
     await ilan.drive_straight(-3)
     await ilan.drive_straight(23,700)
     await ilan.turn(67)
-    await ilan.drive_straight(60,1000) #חזרה לבית0 0הלבן
+    await ilan.drive_straight(60,1000) #חזרה לבית האדום
 
 
 async def mamgura():
@@ -209,7 +220,7 @@ async def elephent():
     await ilan.drive_straight(1, 200)
     # await ilan.wait_for_button(debug=True)
     await ilan.run_front_motor_fast(-46,1.3)
-    await ilan.run_front_motor_fast(80,0.8)
+    await ilan.run_front_motor_fast(80,0.65)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-19, 1000)
     await ilan.wait_for_button(debug)
@@ -324,14 +335,14 @@ detected_color_icons= {
     Color.YELLOW: Icon.SAD,
     Color.WHITE: Icon.PAUSE,
     Color.RED: Icon.TRIANGLE_LEFT,
-    Color.NONE: Icon.FALSE
+    Color.GRAY: Icon.HAPPY,
+    Color.NONE: Icon.FALSE,
 }
 
 
 colors_actions={
     Color.BLUE:{
         Button.BLUETOOTH: elephent,
-        Button.LEFT: skeleton
     },
     Color.YELLOW:{
         Button.BLUETOOTH: ritsatMaavar,
@@ -345,20 +356,26 @@ colors_actions={
     Color.RED:{
         Button.BLUETOOTH: ship
     },
+    Color.GRAY:{
+        Button.BLUETOOTH: skeleton,
+    },
+    Color.BLACK:{
+        Button.BLUETOOTH: all_test,
+    }
 }
 
 
 async def detect_color_and_run():
-        print("Starting color detection...")
-        while True:
-            #await forum()
-            detected_color = await ilan.color_sensor.color()
-            ilan.hub.display.icon(detected_color_icons.get(detected_color, Icon.FALSE))
+    print("Starting color detection...")
+    while True:
+        #await forum()
+        detected_color = await ilan.color_sensor.color()
+        ilan.hub.display.icon(detected_color_icons.get(detected_color, Icon.FALSE))
 
-            if detected_color in colors_actions:
-                actions = colors_actions[detected_color]
-                for button, action in actions.items():
-                    if button in ilan.hub.buttons.pressed():
+        if detected_color in colors_actions:
+            actions = colors_actions[detected_color]
+            for button, action in actions.items():
+                if button in ilan.hub.buttons.pressed():
                         await multitask(action(), stop_if_dressing_removed(), race=True)
 
 
@@ -417,11 +434,11 @@ async def detect_color_and_run():
 async def stop_if_dressing_removed():
     while await ilan.color_sensor.color() != Color.NONE:
         await wait(100)
+        await stop_all()
     for _ in range(3):
         await ilan.hub.speaker.beep()   
         await wait(100)
          
-
         
 async def test():
     ilan.drive_straight(85)

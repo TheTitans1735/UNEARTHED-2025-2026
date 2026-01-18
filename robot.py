@@ -89,6 +89,8 @@ class Robot:
         self.drive_base.use_gyro(True)
         self.emergency_stop = False
         self.color_sensor = ColorSensor(Port.C)
+        self.color_sensor.detectable_colors([Color.BLACK, Color.BLUE, Color.RED,
+                                            Color.ORANGE, Color.YELLOW, Color.GRAY, Color.WHITE, Color.NONE])
 
 
 # נוסע כל הזמן עד שמזהה צבע קסטום (לא UNKNOWN)
