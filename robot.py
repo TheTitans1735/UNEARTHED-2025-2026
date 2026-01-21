@@ -77,6 +77,9 @@ class color:
         return color.UNKNOWN
 
 class Robot:
+
+    # אתחול הרובוט והחיישנים והמנועים השונים
+
     def __init__(self):
         self.hub = PrimeHub()
         self.left_motor = Motor(Port.F, Direction.COUNTERCLOCKWISE)
@@ -96,6 +99,10 @@ class Robot:
 # נוסע כל הזמן עד שמזהה צבע קסטום (לא UNKNOWN)
 
     async def battery_status(self):
+
+        # בדיקת מצב סוללה והצגת צבע בהתאם למצב
+
+        # בדיקת וולט של הסוללה
         voltage = self.hub.battery.voltage()
         print(f"{voltage=}")
         if voltage > 8000:
@@ -108,24 +115,36 @@ class Robot:
             self.hub.light.blink(Color.RED, [1000]) 
 
     async def run_front_motor(self, speed, angle, wait=True):
+
+        # הפעלת מנוע קדמי עם פרמטרים של מהירות וזווית
+
         speed = 110
         self.motor_front.reset_angle(0)
         await self.motor_front.run_target(speed, angle, then=Stop.HOLD, wait=wait)
 
     
     async def run_front_motor_fast(self, duty=100, time_seconds=1.0, should_wait=True):
+
+        # הפעלת מנוע קדמי במהירות גבוהה עם פרמטרים של זמן וכוח
+
         self.motor_front.dc(duty)
         if should_wait==True:
             await wait(time_seconds * 1000)
             self.motor_front.stop()
 
     async def run_back_motor_fast(self, duty=100, time_seconds=1.0, should_wait=True):
+
+        # הפעלת מנוע אחורי במהירות גבוהה עם פרמטרים של זמן וכוח
+
         self.motor_back.dc(duty)
         if should_wait==True:
             await wait(time_seconds * 1000)
             self.motor_back.stop() 
 
     async def run_back_motor(self, speed, angle, wait=True):
+
+        # הפעלת מנוע אחורי עם פרמטרים של מהירות וזווית
+
         self.motor_back.reset_angle(0)
         await self.motor_back.run_target(speed, angle, then=Stop.HOLD, wait=wait)
 
@@ -142,6 +161,9 @@ class Robot:
                              stop_at_end=True,
                              gradual_stop=True,
                              gradtual_start=True):
+        
+    # נוסע קדימה למרחק מסוים עם אפשרות להאטה בהתחלה ובסוף
+
         acceleration_rate = target_speed / 2 if gradtual_start else target_speed
         deceleration_rate = target_speed / 2 if gradual_stop else target_speed
         
@@ -157,6 +179,8 @@ class Robot:
                                 gradual_stop=True,
                                 gradtual_start=True):
 
+    # נוסע קדימה למרחק יותר ארוך עם אפשרות להאטה בהתחלה ובסוף
+
             acceleration_rate = target_speed / 5 if gradtual_start else target_speed
             deceleration_rate = target_speed / 4 if gradual_stop else target_speed
             
@@ -168,6 +192,9 @@ class Robot:
 
   
     async def drive_straight_with_pid_old(self, distance_cm, target_speed=300, stop_at_end=True, timeout_seconds=None, gradual_stop=True, gradtual_start=True, kp=1, ki=0, kd=0):
+
+        # המתודה נוסעת קדחצה מרחק נתון תוך שימוש בפי אי די לשמור על קו ישר
+
         pid = PIDController(kp, ki, kd)
         timer = StopWatch()
         target_distance = distance_cm * 10
@@ -209,6 +236,9 @@ class Robot:
             self.drive_base.stop()
 
     async def turn(self, degrees, speed=150):
+
+        # מסובב את הרובוט בזווית נתון באמצעות שני הגלגלים
+
         await wait(10)
         self.drive_base.stop()  # <-- Stop driving before resetting heading
         self.hub.imu.reset_heading(0)
@@ -226,6 +256,9 @@ class Robot:
         self.right_motor.stop()
 
     async def turn_without_right_wheel(self, degrees, speed=150):
+
+        # 
+
         self.drive_base.stop()  # <-- Stop driving before resetting heading
         self.hub.imu.reset_heading(0)
         if degrees > 0:
