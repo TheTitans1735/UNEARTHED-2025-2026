@@ -17,6 +17,7 @@ async def stop_all():
 
 async def all_test():
     """
+    מפעיל את כל המנועים ימינה במהירות המקסימלית ועוצר אחרי חמש שניות
     בדיקה למנועים
     """
     ilan.motor_front.run(1000)
@@ -34,14 +35,16 @@ async def unearth():
     await ilan.drive_straight(-46, 750)
     await ilan.turn(65)
     await ilan.drive_straight(12, 700)
+    
+    # מנקה את משקעי האדמה
 
-    #מנקה את משקעי האדמה
     await ilan.turn(-21, 200)
     await ilan.turn(37,200)
     await ilan.drive_straight(-11, 500)
     await ilan.turn(-8)
+    
+    # מוציא את המברשת
 
-    #מוציא את המברשת
     await ilan.drive_straight(11, 500)
     await ilan.motor_front.run_until_stalled(400)
     await ilan.drive_straight(-10)
@@ -49,15 +52,17 @@ async def unearth():
     await ilan.turn(-139)
     await ilan.drive_straight(-29, 500)
     await ilan.run_back_motor(500,100)
+    
+    # מסיר את שכבות הקרקע  
 
-    #מסיר את שכבות הקרקע 
     await ilan.drive_straight(-11,500)
     await ilan.drive_straight(3)
     await ilan.motor_back.run_until_stalled(-400)
     await ilan.drive_straight(-13)
     await ilan.drive_straight(-3)
+    
+    # חוזר לבית האדום
 
-    #חוזר לבית האדום
     await ilan.drive_straight(23,700)
     await ilan.turn(67)
     await ilan.drive_straight(60,1000) 
@@ -68,7 +73,7 @@ async def mamgura():
     יציאה מבית כחול, ביצוע משימה 8, לאסוף את קרונית הרכבת וחזרה לבית כחול
     """
     await ilan.drive_straight(45,700)
-
+    
     # ביצוע משימה 8
 
     await ilan.run_front_motor_fast(-85, 0.35)
@@ -91,7 +96,7 @@ async def mamgura():
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-4,500)
     await ilan.wait_for_button(debug)
-
+    
     # אוסף את הקרונית
 
     await ilan.run_back_motor(500,55)
@@ -102,7 +107,7 @@ async def mamgura():
     await ilan.wait_for_button(debug)
     await ilan.turn(-18)
     await ilan.wait_for_button(debug)
-
+    
     # חוזר לבית הכחול
 
     await ilan.drive_straight(-54,700)
@@ -113,19 +118,25 @@ async def ritsatMaavar():
     יציאה מבית כחול, ביצוע משימות 8, 9, 10, וחזרה לבית אדום
     """
     debug=False
-    await ilan.drive_straight(34, 700) # יציאה מהבית הכחול למשימה 8
+    
+    # 8 יציאה מהבית הכחול למשימה 
 
-    #מוציא את כל הפיסות המשומרות
+    await ilan.drive_straight(34, 700) 
+    
+    # מוציא את כל הפיסות המשומרות 
+
     await ilan.run_front_motor_fast(100, 0.2) 
     await ilan.run_front_motor_fast(-100, 0.35) 
     
-    await ilan.run_front_motor_fast(100, 0.2) # ביצוע משימה 8
+    # ביצוע משימה 8
+
+    await ilan.run_front_motor_fast(100, 0.2) 
     await ilan.run_front_motor_fast(-100, 0.35) 
     await ilan.run_front_motor_fast(100, 0.3)
     await ilan.run_front_motor_fast(-100, 0.35)
     await ilan.run_front_motor_fast(100, 0.3)
     await ilan.run_front_motor_fast(-100, 0.35) 
-
+    
     # נוסע לכיוון דוכן הממכר 
 
     await ilan.drive_straight(-12, 500)
@@ -133,12 +144,15 @@ async def ritsatMaavar():
 
     await ilan.drive_straight(-12, 500) 
     await ilan.wait_for_button(debug)
-    await ilan.turn(-51) # הגעה ממשימה 8 למשימה 9
+    
+    # הגעה ממשימה 8 למשימה 9
+
+    await ilan.turn(-51) 
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(35,800)
     
-    #מרים את הסככה בדוכן
-    
+    # מרים את הסככה בדוכן
+
     await ilan.run_front_motor_fast (50, 1)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-20, 500)
@@ -149,30 +163,41 @@ async def ritsatMaavar():
     await ilan.drive_straight(-10, 500)
     await ilan.wait_for_button(debug) 
     
-    #מרים את הסחורה
+    # מרים את הסחורה
+
+    await ilan.wait_for_button(debug)
     
-    await ilan.wait_for_button(debug) # ביצוע משימה 9
+    # ביצוע משימה 9
+
     await ilan.run_front_motor_fast(60, 0.7)
     await ilan.drive_straight(2,200)
     await ilan.wait_for_button(debug)
     await ilan.turn(-35, 170)
     await ilan.run_front_motor_fast(-100, 0.35)
+    
      # ביצוע משימה 8
+    
     await ilan.run_front_motor_fast(-100, 0.35)  
+    
     # ביצוע משימה 10
+
     # await ilan.drive_straight(10,500)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(46,500)
     await ilan.wait_for_button(debug)
     await ilan.turn(87)
     await wait(500)
-
+    
     # ביצוע משימה 10
-
+    
     await ilan.drive_until_button(250)
+    
     # מתיישר על משימה 10
+    
     await ilan.run_front_motor_fast (50, 0.5)
+    
     # מטה את המשקל 
+
     await ilan.wait_for_button(debug)
     await ilan.run_front_motor_fast (-50, 0.75)
     await ilan.drive_straight(-2,250)
@@ -182,6 +207,7 @@ async def ritsatMaavar():
     await ilan.drive_straight(4.5,250)
 
     # מוציא את מגש המוזניים    
+    
     # חזרה לבית הכחול 
 
     await ilan.run_back_motor_fast(-70, 1.2)
@@ -204,14 +230,12 @@ async def discover():
   # לא גמור👌
 
 async def elephent():
-
-    # "יוצא מבית כחול מבצע משימות 6 7 15 חוזר לבית אדום
     """
     יציאה מבית כחול, ביצוע משימות 6, 7, 15, וחזרה לבית כחול
     """
     debug=False
 
-    #נוסע לכיוון המסימות 5, 6 ו-7
+    # נוסע לכיוון המסימות 5, 6 ו-7
 
     await ilan.drive_straight(39, 1000)
     await ilan.turn(-25)
@@ -219,7 +243,7 @@ async def elephent():
     await ilan.turn(83)
     await ilan.drive_straight(11, 500)
 
-    #הופך את רצפות המבנה ומוציא את גושי העפרה 
+    # הופך את רצפות המבנה ומוציא את גושי העפרה   
 
     await ilan.turn(-32)
     await ilan.turn(16)
@@ -251,13 +275,13 @@ async def forum():
     await ilan.run_front_motor(700, -70)
 
 async def skeleton():
-
-    #נוסע לכיוון המסימה 14
-
+    """
+    נוסע לכיוון מסימה 14
+    """
     await ilan.drive_straight(35,700)  
     await ilan.motor_front.run_until_stalled(200)
 
-    #מרים את השלד
+    # מרים את השלד
 
     await ilan.run_front_motor(300, -80)
     await multitask (ilan.run_front_motor(950, -300), ilan.drive_straight(3,300))  
@@ -286,11 +310,14 @@ async def cave():
     await ilan.run_front_motor(500,-40)
     await ilan.turn(90, 150)
 
-    await ilan.drive_straight(80, 1000,gradual_stop=False) #חזרה לבית האדום
+    # חזרה לבית האדום 
+
+    await ilan.drive_straight(80, 1000,gradual_stop=False) 
 
 async def ship():
-    
-    # יוצא מהבית האדום ועושה את משימות 11 ו-12
+    """"
+    יוצא מהבית האדום ועושה את משימות 11 ו-12
+    """
     await ilan.drive_straight(58, 500)
 
     # מבצע את משימה 11
@@ -306,8 +333,8 @@ async def ship():
     await ilan.drive_straight(-69, 800)
 
 detected_color_icons= {
-
-    # מיפוי צבעים לאייקונים להצגה על הבקר
+    
+    # מגדיר אייקון לכל צבע
 
     Color.BLUE: Icon.TRIANGLE_LEFT,
     Color.YELLOW: Icon.SAD,
@@ -320,7 +347,7 @@ detected_color_icons= {
 
 colors_actions={
 
-    # מבצע פעולות לפי צבעים וכפתור 
+    # מבצע פעולות לפי צבע וכפתור 
 
     Color.BLUE:{
         Button.BLUETOOTH: elephent,
@@ -347,21 +374,19 @@ colors_actions={
 
 
 async def detect_color_and_run():
+    """
+    בודק את הצבע הנוכחי ומפעיל את השיטה בהתאם
+    """
     print("Starting color detection...")
     while True:
         #await forum()
-        # בודק את הצבע הנוכחי
         detected_color = await ilan.color_sensor.color()
-        # מציג את האייקון המתאים על הבקר
         ilan.hub.display.icon(detected_color_icons.get(detected_color, Icon.FALSE))
 
         if detected_color in colors_actions:
             actions = colors_actions[detected_color]
-            # בודק כל כפתור והפעולה המתאימה לו
             for button, action in actions.items():
-                # בודק אם הכפתור נלחץ
                 if button in ilan.hub.buttons.pressed():
-                        # מפעיל את הפעולה המתאימה
                         await multitask(action(), stop_if_dressing_removed(), race=True)
 
 
@@ -417,9 +442,9 @@ async def detect_color_and_run():
 
 
 async def stop_if_dressing_removed():
-
-    # פונקציה שעוצרת את כל המנועים כשההלבשה מוסרת
-
+    """
+    פונקציה שעוצרת את כל המנועים כשההלבשה מוסרת
+    """
     while await ilan.color_sensor.color() != Color.NONE:
         await wait(100)
     for _ in range(3):
