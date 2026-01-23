@@ -244,7 +244,7 @@ async def elephent():
     await ilan.drive_straight(11, 500)
 
     # הופך את רצפות המבנה ומוציא את גושי העפרה   
-
+ 
     await ilan.turn(-32)
     await ilan.turn(16)
     await ilan.drive_straight(1, 200)
