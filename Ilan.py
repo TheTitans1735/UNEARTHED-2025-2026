@@ -116,7 +116,7 @@ async def mamgura():
   
 async def ritsatMaavar():
     debug=False
-    await ilan.drive_straight(34, 700) # יציאה מהבית הכחול למשימה 8
+    await ilan.drive_straight(17, 700) # יציאה מהבית הכחול למשימה 8
     
     await ilan.run_front_motor_fast(100, 0.2) # ביצוע משימה 8
     await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
@@ -147,33 +147,35 @@ async def ritsatMaavar():
     await ilan.run_front_motor_fast(60, 0.7)
     await ilan.drive_straight(2,200)
     await ilan.wait_for_button(debug)
-    await ilan.turn(-35, 170)
-    await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
-    # await ilan.drive_straight(10,500)
-    await ilan.wait_for_button(debug)
-    await ilan.drive_straight(46,500)
-    await ilan.wait_for_button(debug)
-    await ilan.turn(87)
-    await wait(500)
-    await ilan.wait_for_button(debug)
-    await ilan.drive_until_button(250)
-    await ilan.run_front_motor_fast (70, 0.5)
-    await ilan.wait_for_button(debug)
-    await ilan.run_front_motor_fast (-70, 0.75)
-    await ilan.drive_straight(-2,250)
-    await ilan.wait_for_button(debug)
-    await ilan.turn(-153)
-    await ilan.wait_for_button(debug)
-    await ilan.drive_straight(4.5,250)
+    await ilan.turn(-220, 170)
+    ilan.motor_front.run_until_stalled(-1000, duty_limit=75)
+    await ilan.drive_straight(-30, 700)
+    # await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
+    # # await ilan.drive_straight(10,500)
+    # await ilan.wait_for_button(debug)
+    # await ilan.drive_straight(46,500)
+    # await ilan.wait_for_button(debug)
+    # await ilan.turn(87)
+    # await wait(500)
+    # await ilan.wait_for_button(debug)
     # await ilan.drive_until_button(250)
-    await ilan.wait_for_button(debug)
-    await ilan.run_back_motor_fast(-70, 1.2)
-    await ilan.wait_for_button(debug)
-    # await ilan.turn(15)
-    await ilan.drive_base.curve(5,95)
-    await ilan.drive_straight(25)
-    await ilan.turn(-55,250)
-    await ilan.drive_until_button(1000) #חזרה לבית הכחול
+    # await ilan.run_front_motor_fast (70, 0.5)
+    # await ilan.wait_for_button(debug)
+    # await ilan.run_front_motor_fast (-70, 0.75)
+    # await ilan.drive_straight(-2,250)
+    # await ilan.wait_for_button(debug)
+    # await ilan.turn(-153)
+    # await ilan.wait_for_button(debug)
+    # await ilan.drive_straight(4.5,250)
+    # # await ilan.drive_until_button(250)
+    # await ilan.wait_for_button(debug)
+    # await ilan.run_back_motor_fast(-70, 1.2)
+    # await ilan.wait_for_button(debug)
+    # # await ilan.turn(15)
+    # await ilan.drive_base.curve(5,95)
+    # await ilan.drive_straight(25)
+    # await ilan.turn(-55,250)
+    # await ilan.drive_until_button(1000) #חזרה לבית הכחול
 
 async def discover():
   await ilan.drive_straight(-40, 500)
