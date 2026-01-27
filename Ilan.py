@@ -118,7 +118,7 @@ async def ritsatMaavar():
     debug=False
     await ilan.drive_straight(17, 700) # יציאה מהבית הכחול למשימה 8
     
-    await ilan.run_front_motor_fast(100, 0.2) # ביצוע משימה 8
+    await ilan.run_front_motor_fast(100, 0.3) # ביצוע משימה 8
     await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
     await ilan.run_front_motor_fast(100, 0.3)
     await ilan.run_front_motor_fast(-100, 0.35)
@@ -147,7 +147,7 @@ async def ritsatMaavar():
     await ilan.run_front_motor_fast(60, 0.7)
     await ilan.drive_straight(2,200)
     await ilan.wait_for_button(debug)
-    await multitask(ilan.turn(-225, 170), ilan.motor_front.run_until_stalled(-1000, duty_limit=75))
+    await multitask(ilan.turn(-225, 250), ilan.motor_front.run_until_stalled(-1000, duty_limit=75))
     await ilan.drive_straight(-45.5, 700)
     await ilan.turn(90, 400)
     await ilan.drive_straight(-14, 1000, gradtual_start=False, gradual_stop=False)
@@ -155,9 +155,11 @@ async def ritsatMaavar():
     await ilan.run_back_motor_fast(-100, 0.3)
     await ilan.drive_straight(10, 1000, gradtual_start=False, gradual_stop=False)
     await ilan.turn(-80, 400)
-    await ilan.drive_straight2(-90, 1000, gradtual_start=False, gradual_stop=False)
+    # await ilan.drive_straight2(-85, 1000, gradtual_start=False, gradual_stop=False,stop_at_end=False)
+    await multitask(ilan.drive_straight2(-85, 1000, gradtual_start=False, gradual_stop=False,stop_at_end=False), ilan.motor_front.run_until_stalled(-500,duty_limit=75))
     await ilan.turn(-45, 700)
-    await ilan.drive_straight(-50, gradual_stop=False, gradtual_start=False)
+    # await ilan.drive_straiht(-50, gradual_stop=False, gradtual_start=False)
+    await ilan.drive_until_touch(-500)
     # await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
     # # await ilan.drive_straight(10,500)
     # await ilan.wait_for_button(debug)
@@ -230,9 +232,9 @@ async def forum():
     await ilan.drive_straight(20, 700)
     await ilan.turn(90, speed=150)
     await ilan.drive_straight(10, 700)
-    await ilan.run_front_motor(700, -20)
+    await ilan.run_front_motor(110, -20)
     await ilan.turn(-11, speed=150)
-    await ilan.run_front_motor(700, -70)
+    await ilan.run_front_motor(110, -70)
 
 async def skeleton():
     """
@@ -244,7 +246,7 @@ async def skeleton():
     # מרים את השלד
 
     await ilan.run_front_motor(300, -80)
-    await multitask (ilan.run_front_motor(950, -300), ilan.drive_straight(3,300))  
+    await multitask (ilan.run_front_motor(110, -300), ilan.drive_straight(3,300))  
     await ilan.drive_straight(5,500)
     await ilan.drive_straight(-15,500)
     
@@ -264,10 +266,10 @@ async def cave():
  
     await multitask(ilan.motor_front.run_time(300, 2100), ilan.motor_back.run_time(1000, 3000))
     await ilan.drive_straight_with_pid_old(8, 75, kp=00)
-    await ilan.run_front_motor(100, -50) 
+    await ilan.run_front_motor(120, -90) 
     await ilan.motor_back.run_time(-1000, 1800)
     await ilan.drive_straight(-12, 125)
-    await ilan.run_front_motor(500,-40)
+    await ilan.run_front_motor(110,-40)
     await ilan.turn(90, 250)
 
     # חזרה לבית האדום 
@@ -282,13 +284,13 @@ async def ship():
 
     # מבצע את משימה 11
 
-    await ilan.run_front_motor(speed=400, angle=140)
+    await ilan.run_front_motor(speed=110, angle=140)
     await ilan.run_back_motor_fast(100, 4)
 
     # מבצע את משימה 12
 
     await ilan.drive_straight(-11, 900)
-    await ilan.run_front_motor(1000, -170)
+    await ilan.run_front_motor(110, -170)
     await ilan.drive_straight(20, 500,gradual_stop=False)
     await ilan.drive_straight(-69, 1000, gradual_stop=False)
 

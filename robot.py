@@ -114,11 +114,10 @@ class Robot:
         else:
             self.hub.light.blink(Color.RED, [1000]) 
 
-    async def run_front_motor(self, speed, angle, wait=True):
+    async def run_front_motor(self, speed=100, angle=90, wait=True):
 
         # הפעלת מנוע קדמי עם פרמטרים של מהירות(מעלות לשנייה) וזווית
-
-        speed = 110
+        
         self.motor_front.reset_angle(0)
         await self.motor_front.run_target(speed, angle, then=Stop.HOLD, wait=wait)
 
@@ -312,6 +311,7 @@ class Robot:
         self.drive_base.stop()
         self.motor_front.stop()
         self.motor_back.stop()
+        
     async def drive_until_bluetooth(self, speed=500):
         """
         מתחיל לנסוע קדימה, ואם לוחצים על כפתור BLUETOOTH עוצר וחוזר לתפריט.
