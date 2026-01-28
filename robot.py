@@ -311,7 +311,7 @@ class Robot:
         self.drive_base.stop()
         self.motor_front.stop()
         self.motor_back.stop()
-        
+
     async def drive_until_bluetooth(self, speed=500):
         """
         מתחיל לנסוע קדימה, ואם לוחצים על כפתור BLUETOOTH עוצר וחוזר לתפריט.
@@ -364,7 +364,7 @@ class Robot:
         self.motor_front.stop()
         self.motor_back.stop()
 
-    async def run_until_force_touched(self, speed=750, max_force=1.200):
+    async def run_until_force_touched(self, speed=750, max_force=4.200):
         """
         נוסע במהירות(במילימטרים לשנייה) ומרחק שהחיישן מגע זז(במילימטרים) ועוצר שהחיישן זז יותר מהמרחק הנתון
         """

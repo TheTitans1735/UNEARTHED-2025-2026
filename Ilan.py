@@ -31,42 +31,67 @@ async def unearth():
     """""
      יוצא מהבית האדום ועושה את משימות 1 ו-2
     """
-
-    await ilan.drive_straight(-46, 750)
-    await ilan.turn(65)
-    await ilan.drive_straight(12, 700)
+    await multitask(
+        ilan.drive_straight(-65, 750), 
+        ilan.motor_front.run_until_stalled(-200,duty_limit=75), 
+        ilan.run_back_motor(450,300)
+    )
+    await ilan.turn(130,250)
+    await ilan.turn(-50,250)
+    await ilan.run_front_motor(200,100)
+    await ilan.turn(10)
+    await ilan.run_front_motor(100,-95)
+    await ilan.drive_until_button(500)
+    await ilan.run_front_motor(300,180)
+    await ilan.drive_straight_with_pid_old(-1,200,kp=00)
+    await ilan.turn_without_right_wheel(-130,300)
+    # await multitask( ilan.turn_without_right_wheel(-10,150))#, ilan.run_back_motor(500,260))
+    await ilan.wait_for_button()
+    await ilan.drive_straight(-13,450)
+    await ilan.motor_back.run_until_stalled(250,duty_limit=75)
+    await ilan.wait_for_button()
+    await ilan.drive_straight(4,450)
+    # await ilan.motor_back.run_until_stalled(-250)
+    await ilan.wait_for_button()
+    await ilan.motor_front.run_until_stalled(250)
     
-    # מנקה את משקעי האדמה
-
-    await ilan.turn(-21, 200)
-    await ilan.turn(37,200)
-    await ilan.drive_straight(-11, 500)
-    await ilan.turn(-8)
-    
-    # מוציא את המברשת
-
-    await ilan.drive_straight(11, 500)
-    await ilan.motor_front.run_until_stalled(400)
-    # await ilan.drive_straight(-10)
-    # await ilan.run_back_motor(500,260)
-    await multitask( ilan.run_back_motor(500,260), ilan.drive_straight(-10))
-    await ilan.turn(-139)
-    await ilan.drive_straight(-29, 500)
-    await ilan.run_back_motor(500,100)
-    
-    # מסיר את שכבות הקרקע  
-
-    await ilan.drive_straight(-11,500)
-    await ilan.drive_straight(3)
-    await ilan.motor_back.run_until_stalled(-400)
-    # await ilan.drive_straight(-13)
-    # await ilan.drive_straight(-3)
-    
-    # חוזר לבית האדום
-
-    await ilan.drive_straight(23,700)
+    await ilan.drive_straight(15,700,False)
     await ilan.turn(67,250)
     await ilan.drive_straight(60,1000,gradual_stop=False, gradtual_start=False) 
+
+    # await ilan.drive_straight(12, 700)
+
+    # מנקה את משקעי האדמה
+
+    # await ilan.turn(-21, 200)
+    # await ilan.turn(37,200)
+    # await ilan.drive_straight(-11, 500)
+    # await ilan.turn(-8)
+    
+    # # מוציא את המברשת
+
+    # await ilan.drive_straight(11, 500)
+    # await ilan.motor_front.run_until_stalled(400)
+    # # await ilan.drive_straight(-10)
+    # # await ilan.run_back_motor(500,260)
+    # await multitask( ilan.run_back_motor(500,260), ilan.drive_straight(-10))
+    # await ilan.turn(-139)
+    # await ilan.drive_straight(-29, 500)
+    # await ilan.run_back_motor(500,100)
+    
+    # # מסיר את שכבות הקרקע  
+
+    # await ilan.drive_straight(-11,500)
+    # await ilan.drive_straight(3)
+    # await ilan.motor_back.run_until_stalled(-400)
+    # # await ilan.drive_straight(-13)
+    # # await ilan.drive_straight(-3)
+    
+    # # חוזר לבית האדום
+
+    # await ilan.drive_straight(23,700)
+    # await ilan.turn(67,250)
+    # await ilan.drive_straight(60,1000,gradual_stop=False, gradtual_start=False) 
 
 
 async def mamgura():
