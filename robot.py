@@ -384,3 +384,14 @@ class Robot:
     #         detected_color = await self.color_sensor.color()
     #         print(f"Detected: {detected_color}")
     
+    async def buttery_status(self):
+        voltage = self.hub.battery.voltage()
+        print(f"{voltage=}")
+        if voltage > 8000:
+            self.hub.light.blink(Color.GREEN, [1000])
+        elif voltage > 7500:
+            self.hub.light.blink(Color.BLUE, [1000])
+        elif voltage > 7000:
+            self.hub.light.blink(Color.ORANGE, [1000])
+        else:
+            self.hub.light.blink(Color.RED, [1000])

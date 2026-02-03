@@ -236,27 +236,23 @@ async def ship():
 
 
 async def main():
-        """
-        פונקציה המבצעת את כל התכניות
-        """
-        runs = [
-            ("0", elephent , Icon.TRIANGLE_UP),
-            ("1", ritsatMaavar , Icon.LEFT),
-            ("2", unearth, Icon.FALSE), 
-            ("3", cave , Icon.HAPPY),
-            ("4", ship, Icon.SAD),
-            ("5", skeleton, Icon.PAUSE),
-            ("7", all_test, Icon.FULL),
+    runs = [
+            ("0", elephent ), #Icon.TRIANGLE_UP),
+            ("1", ritsatMaavar), #Icon.LEFT),
+            ("2", unearth),# Icon.FALSE), 
+            ("3", cave), # Icon.HAPPY),
+            ("4", ship), #Icon.SAD),
+            ("5", skeleton), #Icon.PAUSE),
+            ("7", all_test), # Icon.FULL), 
+    ]
+    current_run = 0
+    await ilan.buttery_status()     
 
-        
-        ]
-        current_run = 0
-        # # await ilan.buttery_status()     
-        # buttery_status_timer = StopWatch()   
-        # while True:
-        #     if buttery_status_timer.time()> 10000:
-        #         await ilan.buttery_status()
-        #         buttery_status_timer.reset()
+    buttery_status_timer = StopWatch()   
+    while True:
+        if buttery_status_timer.time()> 10000:
+            await ilan.buttery_status()
+            buttery_status_timer.reset()
         try:
             if (Button.LEFT in ilan.hub.buttons.pressed()):
                 current_run += 1
@@ -264,7 +260,8 @@ async def main():
                     current_run = 0
                 if len(runs[current_run]) ==2:
                     ilan.hub.display.char(runs[current_run][0])
-
+                else:
+                    ilan.hub.display.icon(runs[current_run][2])
 
             elif (Button.RIGHT in ilan.hub.buttons.pressed()):
                 current_run -= 1
@@ -291,7 +288,7 @@ async def main():
             print(e)
             raise e
         finally:
-            await wait(150)
+            await wait(100)
 
 
 run_task(main())

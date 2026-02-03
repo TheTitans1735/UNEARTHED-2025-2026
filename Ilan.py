@@ -141,6 +141,7 @@ async def ritsatMaavar():
     
     await ilan.run_front_motor_fast(100, 0.32) # ביצוע משימה 8
     await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
+    await wait(50)
     await ilan.run_front_motor_fast(100, 0.3)
     await ilan.run_front_motor_fast(-100, 0.35)
     await ilan.run_front_motor_fast(100, 0.3)
@@ -236,10 +237,10 @@ async def elephent():
 
     #מרים את המשקולות 
     await ilan.run_front_motor_fast(-46,1.3)
-    await ilan.run_front_motor_fast(80,0.7)
+    await ilan.run_front_motor_fast(80,0.6)
 
     #חוזר לבית הכחול 
-    await ilan.drive_straight(-19, 1000)
+    await multitask(ilan.drive_straight(-19, 1000),ilan.motor_front.run_until_stalled(150,duty_limit=45))
     await ilan.turn(120,200)
     await ilan.drive_straight(62,1000,gradual_stop=False)
 
@@ -361,16 +362,25 @@ async def detect_color_and_run():
     בודק את הצבע הנוכחי ומפעיל את השיטה בהתאם
     """
     print("Starting color detection...")
-    while True:
-        #await forum()
-        detected_color = await ilan.color_sensor.color()
-        ilan.hub.display.icon(detected_color_icons.get(detected_color, Icon.FALSE))
+    await ilan.buttery_status()     
 
-        if detected_color in colors_actions:
-            actions = colors_actions[detected_color]
-            for button, action in actions.items():
-                if button in ilan.hub.buttons.pressed():
+    buttery_status_timer = StopWatch() 
+    while True:
+        if buttery_status_timer.time()> 10000:
+            await ilan.buttery_status()
+            buttery_status_timer.reset()
+        try:
+            detected_color = await ilan.color_sensor.color()
+            ilan.hub.display.icon(detected_color_icons.get(detected_color, Icon.FALSE))
+
+            if detected_color in colors_actions:
+                actions = colors_actions[detected_color]
+                for button, action in actions.items():
+                    if button in ilan.hub.buttons.pressed():
                         await multitask(action(), stop_if_dressing_removed(), race=True)
+        except Exception as e:
+            print(f"Error in detect_color_and_run loop: {e}")
+            await wait(100)
 
 
             # if  detected_color == Color.BLUE:
