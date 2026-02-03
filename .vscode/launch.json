@@ -70,5 +70,22 @@
                 "PYTHONUTF8": "1"
             }
         },
+            {
+            "name": "withot color jebbta",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pybricksdev",
+            "args": [
+                "run",
+                "ble",
+                "--name",
+                "YAHAV",
+                "ilan_withot_color.py"
+            ],
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONUTF8": "1"
+            }
+        }
     ]
 }
