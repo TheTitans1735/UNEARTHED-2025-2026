@@ -36,22 +36,21 @@ async def unearth():
         ilan.motor_front.run_until_stalled(-200,duty_limit=40), 
         ilan.motor_back.run_time(200,1600)
     )
-    await ilan.turn(110,350)
-    await ilan.turn(-30,350)
+    await ilan.turn(90,350)
+    await ilan.turn(-10,350)
     await ilan.run_front_motor(200,100)
     await ilan.turn(17)
+    await wait(500)
     await ilan.run_front_motor(100,-95)
     await ilan.drive_until_button(500)
     await ilan.run_front_motor(300,170)
     await ilan.drive_straight_with_pid_old(-1,200,kp=00)
     await ilan.turn_without_right_wheel(-130,450)
-    # await multitask( ilan.turn_without_right_wheel(-10,150))#, ilan.run_back_motor(500,260))
     await ilan.drive_straight(-10,450)
     await ilan.motor_back.run_until_stalled(400,duty_limit=40)
     await ilan.drive_straight(-5,450,gradual_stop=False)
     await ilan.run_back_motor(200,-150)
     await multitask(ilan.motor_back.run_until_stalled(-250,duty_limit=55), ilan.motor_front.run_time(250,1), ilan.drive_straight(8,300,False,False,False))
-    # await ilan.drive_straight(4,700,False,False,False)
     await ilan.turn(60,400)
     await ilan.drive_straight(60,1000,gradual_stop=False, gradtual_start=False) 
 
@@ -240,9 +239,9 @@ async def elephent():
     await ilan.run_front_motor_fast(80,0.6)
 
     #חוזר לבית הכחול 
-    await multitask(ilan.drive_straight(-19, 1000),ilan.motor_front.run_until_stalled(150,duty_limit=45))
-    await ilan.turn(120,200)
-    await ilan.drive_straight(62,1000,gradual_stop=False)
+    await multitask(ilan.drive_straight(-10, 1000),ilan.motor_front.run_until_stalled(150,duty_limit=45))
+    await ilan.turn(-70,200)
+    await ilan.drive_straight(-62,1000,gradual_stop=False)
 
 
 
