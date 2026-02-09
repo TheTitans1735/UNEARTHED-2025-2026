@@ -88,7 +88,9 @@ async def unearth():
     # await ilan.turn(67,250)
     # await ilan.drive_straight(60,1000,gradual_stop=False, gradtual_start=False) 
 
-
+async def flag():
+    await ilan.drive_straight(42, 700,gradual_stop=False)
+    await ilan.drive_straight(-42,1000,gradual_stop=False, gradtual_start=False)
 async def mamgura():
     """
     יציאה מבית כחול, ביצוע משימה 8, לאסוף את קרונית הרכבת וחזרה לבית כחול
@@ -270,7 +272,9 @@ async def skeleton():
     await ilan.run_front_motor(300, -80)
     await multitask (ilan.run_front_motor(110, -300), ilan.drive_straight(3,300))  
     await ilan.drive_straight(5,500)
-    await ilan.drive_straight(-15,500)
+    await ilan.drive_straight(-15,1000,gradual_stop=False,gradtual_start=False,stop_at_end=False)
+    await ilan.turn(25,300)
+    await ilan.drive_straight(-30,1000,gradual_stop=False,gradtual_start=False)
     
 
 
@@ -335,6 +339,7 @@ colors_actions={
 
     Color.BLUE:{
         Button.BLUETOOTH: elephent,
+        Button.RIGHT: flag 
     },
     Color.YELLOW:{
         Button.BLUETOOTH: ritsatMaavar,
