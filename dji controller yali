@@ -1,0 +1,98 @@
+import pygame
+import cv2
+import os
+from djitellopy import Tello
+from datetime import datetime
+
+#🎶🎶🎶🎶🎶🎶🎶🎶🎶🎶
+# סיכום מקשים 🎮
+# מקש	פעולה:
+# W / S	קדימה / אחורה
+# A / D	שמאלה / ימינה
+# ↑ / ↓	עלייה / ירידה
+# ← / →	סיבוב
+# P	📸 צילום תמונה
+# ESC	🔴 נחיתה ויציאה
+#🎶🎶🎶🎶🎶🎶🎶🎶🎶🎶
+
+
+# ---------- הגדרות ----------
+SPEED = 50
+IMAGE_DIR = "photos"
+
+# יצירת תיקייה לתמונות
+os.makedirs(IMAGE_DIR, exist_ok=True)
+
+# ---------- אתחול ----------
+pygame.init()
+screen = pygame.display.set_mode((400, 300))
+pygame.display.set_caption("DJI Tello Controller")
+
+tello = Tello()
+tello.connect()
+print("Battery:", tello.get_battery(), "%")
+
+tello.streamon()
+frame_read = tello.get_frame_read()
+
+tello.takeoff()
+print("Takeoff")
+
+clock = pygame.time.Clock()
+running = True
+
+# ---------- לולאת שליטה ----------
+while running:
+    clock.tick(30)
+
+    for event in pygame.event.get():
+        # סגירת חלון
+        if event.type == pygame.QUIT:
+            running = False
+
+        # מקש ESC – נחיתה מיידית
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                print("Emergency land")
+                tello.land()
+                running = False
+
+            # מקש P – צילום תמונה
+            if event.key == pygame.K_p:
+                frame = frame_read.frame
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                filename = f"{IMAGE_DIR}/tello_{timestamp}.jpg"
+                cv2.imwrite(filename, frame)
+                print(f"Photo saved: {filename}")
+
+    keys = pygame.key.get_pressed()
+
+    # תנועה
+    lr = fb = ud = yaw = 0
+
+    if keys[pygame.K_w]:
+        fb = SPEED
+    elif keys[pygame.K_s]:
+        fb = -SPEED
+
+    if keys[pygame.K_a]:
+        lr = -SPEED
+    elif keys[pygame.K_d]:
+        lr = SPEED
+
+    if keys[pygame.K_UP]:
+        ud = SPEED
+    elif keys[pygame.K_DOWN]:
+        ud = -SPEED
+
+    if keys[pygame.K_LEFT]:
+        yaw = -SPEED
+    elif keys[pygame.K_RIGHT]:
+        yaw = SPEED
+
+    tello.send_rc_control(lr, fb, ud, yaw)
+
+# ---------- סיום בטוח ----------
+tello.streamoff()
+pygame.quit()
+print("Controller closed safely")

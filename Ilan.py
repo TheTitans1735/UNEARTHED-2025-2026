@@ -34,7 +34,7 @@ async def unearth():
     await multitask(
         ilan.drive_straight(-65, 750), 
         ilan.motor_front.run_until_stalled(-200,duty_limit=40), 
-        ilan.motor_back.run_time(200,1600)
+        ilan.motor_back.run_time(200,1500)
     )
     await ilan.turn(90,350)
     await ilan.turn(-10,350)
