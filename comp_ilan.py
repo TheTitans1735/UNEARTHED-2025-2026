@@ -224,7 +224,6 @@ async def ship():
 # ==================== Color Detection Mappings ====================
 
 detected_color_icons = {
-    """מיפוי אייקון לכל צבע לתצוגה בקולט"""
     Color.BLUE: Icon.TRIANGLE_LEFT,
     Color.YELLOW: Icon.SAD,
     Color.WHITE: Icon.PAUSE,
@@ -233,20 +232,18 @@ detected_color_icons = {
     Color.BLACK: Icon.HEART,
 }
 
-
+#מיפוי פעולות לביצוע בהתאם לצבע וכפתור שנלחץ
 colors_actions = {
-    """מיפוי פעולות לביצוע בהתאם לצבע וכפתור שנלחץ"""
+    
     Color.BLUE: {
         Button.BLUETOOTH: elephent,
         Button.RIGHT: flag 
     },
     Color.YELLOW: {
         Button.BLUETOOTH: ritsatMaavar,
-        Button.RIGHT: mamgura
     },
     Color.WHITE: {
         Button.BLUETOOTH: unearth,
-        Button.LEFT: discover,
         Button.RIGHT: cave
     },
     Color.RED: {
