@@ -27,6 +27,10 @@ async def all_test():
     await wait(5000)
     await stop_all()
 
+async def test():
+    await ilan.run_front_motor(220, 1000)
+
+
 async def unearth():
     """""
      יוצא מהבית האדום ועושה את משימות 1 ו-2
@@ -138,15 +142,15 @@ async def mamgura():
   
 async def ritsatMaavar():
     debug=False
-    await ilan.drive_straight(17, 700) # יציאה מהבית הכחול למשימה 8
+    await ilan.drive_straight(19, 700) # יציאה מהבית הכחול למשימה 8
     
     await ilan.run_front_motor_fast(100, 0.32) # ביצוע משימה 8
     await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
-    await wait(50)
+    await wait(250)
     await ilan.run_front_motor_fast(100, 0.3)
     await ilan.run_front_motor_fast(-100, 0.35)
-    await ilan.run_front_motor_fast(100, 0.3)
     await wait(250)
+    await ilan.run_front_motor_fast(100, 0.3)
     await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
 
     await ilan.drive_straight(-12, 500)
@@ -154,7 +158,7 @@ async def ritsatMaavar():
 
     await ilan.turn(-51) # הגעה ממשימה 8 למשימה 9
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(35,800)
+    await ilan.drive_straight(29,800)
     await ilan.wait_for_button(debug)
     await ilan.run_front_motor_fast (50, 1.1)
     await ilan.wait_for_button(debug)
@@ -228,7 +232,7 @@ async def elephent():
     #נוסע לכיוון המסימות 5, 6 ו-7
     await ilan.drive_straight(39, 1000)
     await ilan.turn(-25)
-    await ilan.drive_straight(35, 700)
+    await ilan.drive_straight(34.6, 700)
     await ilan.turn(83)
     await ilan.drive_straight(11, 500)
 
@@ -261,20 +265,30 @@ async def forum():
     await ilan.run_front_motor(110, -70)
 
 async def skeleton():
+    debug=False
     """
     נוסע לכיוון מסימה 14
     """
-    await ilan.drive_straight(35,700)  
+    await ilan.drive_straight(35,700) 
+    await ilan.wait_for_button(debug) 
     await ilan.motor_front.run_until_stalled(500, duty_limit=75)
+    await ilan.wait_for_button(debug)
 
     # מרים את השלד
 
     await ilan.run_front_motor(300, -80)
-    await multitask (ilan.run_front_motor(110, -300), ilan.drive_straight(3,300))  
+    await ilan.wait_for_button(debug)
+    await multitask (ilan.run_front_motor(110, -300), ilan.drive_straight(3,300))
+    await ilan.wait_for_button(debug)  
     await ilan.drive_straight(5,500)
-    await ilan.drive_straight(-15,1000,gradual_stop=False,gradtual_start=False,stop_at_end=False)
-    await ilan.turn(25,300)
-    await ilan.drive_straight(-30,1000,gradual_stop=False,gradtual_start=False)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-4,1000,gradual_stop=False,gradtual_start=False,stop_at_end=False)
+    await ilan.wait_for_button(debug)
+    await ilan.turn_without_right_wheel(27,50)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-5,500)
+    await ilan.wait_for_button(debug)
+    # await ilan.drive_straight(-30,1000,gradual_stop=False,gradtual_start=False)
     
 
 
@@ -292,7 +306,7 @@ async def cave():
  
     await multitask(ilan.motor_front.run_time(300, 2100), ilan.motor_back.run_time(1000, 3000))
     await ilan.drive_straight_with_pid_old(8, 75, kp=00)
-    await ilan.run_front_motor(120, -90) 
+    await ilan.run_front_motor(120, -80) 
     await ilan.motor_back.run_time(-1000, 1800)
     await ilan.drive_straight(-12, 125)
     await ilan.run_front_motor(110,-40)
@@ -337,9 +351,12 @@ colors_actions={
 
     # מבצע פעולות לפי צבע וכפתור 
 
+
+
     Color.BLUE:{
         Button.BLUETOOTH: elephent,
-        Button.RIGHT: flag 
+        Button.RIGHT: flag,
+        Button.LEFT: test
     },
     Color.YELLOW:{
         Button.BLUETOOTH: ritsatMaavar,
