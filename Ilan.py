@@ -28,7 +28,11 @@ async def all_test():
     await stop_all()
 
 async def test():
-    await ilan.run_front_motor(220, 1000)
+    await ilan.run_front_motor_fast(40,1.3)
+    await ilan.run_front_motor_fast(-100,0.9)
+
+    
+    await multitask(ilan.drive_straight(-10, 1000),ilan.motor_front.run_until_stalled(-150,duty_limit=3))
 
 
 async def unearth():
@@ -142,16 +146,17 @@ async def mamgura():
   
 async def ritsatMaavar():
     debug=False
-    await ilan.drive_straight(19, 700) # יציאה מהבית הכחול למשימה 8
+    await ilan.drive_straight(16, 700) # יציאה מהבית הכחול למשימה 8
     
-    await ilan.run_front_motor_fast(100, 0.32) # ביצוע משימה 8
-    await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
-    await wait(250)
-    await ilan.run_front_motor_fast(100, 0.3)
-    await ilan.run_front_motor_fast(-100, 0.35)
-    await wait(250)
-    await ilan.run_front_motor_fast(100, 0.3)
-    await ilan.run_front_motor_fast(-100, 0.35) # ביצוע משימה 8
+    await ilan.run_front_motor_fast(100, 0.5) # ביצוע משימה 8
+    # await ilan.motor_front.run_time(1000, 5000)
+    await ilan.run_front_motor_fast(-100, 0.45) # ביצוע משימה 8
+    await wait(100)
+    await ilan.run_front_motor_fast(100, 0.5)
+    await ilan.run_front_motor_fast(-100, 0.45)
+    await wait(100)
+    await ilan.run_front_motor_fast(100, 0.5)
+    await ilan.run_front_motor_fast(-100, 0.45) # ביצוע משימה 8
 
     await ilan.drive_straight(-12, 500)
     await ilan.wait_for_button(debug)
@@ -292,7 +297,6 @@ async def skeleton():
     
 
 
-
 async def cave():
 
     # יוצא מהבית האדום ועושה את משימות 3 ו-4
@@ -315,6 +319,18 @@ async def cave():
     # חזרה לבית האדום 
 
     await ilan.drive_straight(80, 1000,gradual_stop=False,gradtual_start=False) 
+
+async def cave3():
+    debug=True
+    await ilan.drive_straight(-70, 500)
+    await ilan.turn(90, 200)
+    await ilan.drive_straight(-35, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.turn(-85, 200)
+    await ilan.drive_straight(3, 500)       
+    await ilan.run_front_motor(200, 100)
+    
+
 
 async def ship():
     """"
@@ -365,7 +381,7 @@ colors_actions={
     Color.WHITE:{
         Button.BLUETOOTH: unearth,
         Button.LEFT: discover,
-        Button.RIGHT: cave
+        Button.RIGHT: cave3
     },
     Color.RED:{
         Button.BLUETOOTH: ship
