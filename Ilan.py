@@ -29,10 +29,10 @@ async def all_test():
 
 async def test():
     await ilan.run_front_motor_fast(40,1.3)
-    await ilan.run_front_motor_fast(-100,0.9)
+    await ilan.run_front_motor_fast(-100,0.6)
 
     
-    await multitask(ilan.drive_straight(-10, 1000),ilan.motor_front.run_until_stalled(-150,duty_limit=3))
+    await multitask(ilan.drive_straight(-10, 1000),ilan.motor_front.run_until_stalled(-150,duty_limit=55))
 
 
 async def unearth():
@@ -247,11 +247,11 @@ async def elephent():
     await ilan.drive_straight(1, 200)
 
     #מרים את המשקולות 
-    await ilan.run_front_motor_fast(-46,1.3)
-    await ilan.run_front_motor_fast(80,0.6)
+    await ilan.run_front_motor_fast(40,1.3)
+    await ilan.run_front_motor_fast(-100,0.6)
 
-    #חוזר לבית הכחול 
-    await multitask(ilan.drive_straight(-10, 1000),ilan.motor_front.run_until_stalled(150,duty_limit=45))
+    
+    await multitask(ilan.drive_straight(-10, 1000),ilan.motor_front.run_until_stalled(-150,duty_limit=37))
     await ilan.turn(-70,200)
     await ilan.drive_straight(-62,1000,gradual_stop=False)
 
@@ -289,9 +289,9 @@ async def skeleton():
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-4,1000,gradual_stop=False,gradtual_start=False,stop_at_end=False)
     await ilan.wait_for_button(debug)
-    await ilan.turn_without_right_wheel(27,50)
+    await ilan.turn_without_right_wheel(22,50)
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(-5,500)
+    await ilan.turn_without_left_wheel(20,50)
     await ilan.wait_for_button(debug)
     # await ilan.drive_straight(-30,1000,gradual_stop=False,gradtual_start=False)
     

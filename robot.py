@@ -259,7 +259,6 @@ class Robot:
         """
         מסתובב על גלגל יחיד בלבד במהירות(מילימטרים לשנייה) וזווית נתונים
         """
-        
 
         self.drive_base.stop()  # <-- Stop driving before resetting heading
         self.hub.imu.reset_heading(0)
@@ -267,6 +266,24 @@ class Robot:
             self.left_motor.run(speed)
         else:
             self.left_motor.run(-speed)
+
+        while abs(self.hub.imu.heading() - degrees) > 2:
+            await wait(0)
+
+        self.left_motor.stop()
+        self.right_motor.stop()
+
+    async def turn_without_left_wheel(self, degrees, speed=150):
+        """
+        # מסתובב על גלגל יחיד בלבד במהירות(מילימטרים לשנייה) וזווית נתונים
+        """
+
+        self.drive_base.stop()  # <-- Stop driving before resetting heading
+        self.hub.imu.reset_heading(0)
+        if degrees > 0:
+            self.right_motor.run(speed)
+        else:
+            self.right_motor.run(-speed)
 
         while abs(self.hub.imu.heading() - degrees) > 2:
             await wait(0)
