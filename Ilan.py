@@ -19,7 +19,7 @@ async def all_test():
     """
     מפעיל את כל המנועים ימינה במהירות המקסימלית ועוצר אחרי חמש שניות
     בדיקה למנועים
-    
+
     """
     ilan.motor_front.run(1000)
     ilan.left_motor.run(1000)
@@ -155,6 +155,19 @@ async def ritsatMaavar2():
     await wait(100)
     await ilan.run_back_motor_fast(100, 0.25)
     await ilan.run_back_motor_fast(-100, 0.45) # ביצוע משימה 8
+    await wait(100)
+    await ilan.run_back_motor_fast(100, 0.25)
+    await ilan.run_back_motor_fast(-100, 0.45) # ביצוע משימה 8
+    await ilan.run_back_motor_fast(100, 0.25)
+    await ilan.drive_straight(23, 500)
+    await ilan.turn(130)
+    await ilan.run_front_motor_fast(100, 0.16)
+
+    await ilan.drive_straight(20, 700,False,False)
+    await ilan.drive_until_button(500)
+    await wait(100)
+    await ilan.run_front_motor_fast(100, 0.2)
+    await ilan.drive_straight(-10, 700,False,False)
 
 
 async def ritsatMaavar():
