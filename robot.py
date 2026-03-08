@@ -275,15 +275,15 @@ class Robot:
 
     async def turn_without_left_wheel(self, degrees, speed=150):
         """
-        # מסתובב על גלגל יחיד בלבד במהירות(מילימטרים לשנייה) וזווית נתונים
+        # מסתובב על גלגל יחיד בלבד במהירות(מילימטרים לשנייה) וזווית נתונים(כאשר המהירות חיובית)
         """
 
         self.drive_base.stop()  # <-- Stop driving before resetting heading
         self.hub.imu.reset_heading(0)
         if degrees > 0:
-            self.right_motor.run(speed)
-        else:
             self.right_motor.run(-speed)
+        else:
+            self.right_motor.run(speed)
 
         while abs(self.hub.imu.heading() - degrees) > 2:
             await wait(0)

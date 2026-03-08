@@ -317,7 +317,7 @@ async def skeleton():
     await ilan.wait_for_button(debug)
     await ilan.turn_without_right_wheel(22,50)
     await ilan.wait_for_button(debug)
-    await ilan.turn_without_left_wheel(20,50)
+    await ilan.turn_without_right_wheel(20,50)
     await ilan.wait_for_button(debug)
     # await ilan.drive_straight(-30,1000,gradual_stop=False,gradtual_start=False)
     
@@ -353,8 +353,9 @@ async def cave3():
     await ilan.drive_straight(-35, 500)
     await ilan.wait_for_button(debug)
     await ilan.turn(-85, 200)
-    await ilan.drive_straight(3, 500)       
-    await ilan.run_front_motor(200, 100)
+    await ilan.drive_straight(-3, 500)
+    await multitask(ilan.run_front_motor(110, 250), ilan.drive_straight(-2, 300))
+    await ilan.run_back_motor(500, 90)
     
 
 
