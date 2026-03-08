@@ -143,7 +143,19 @@ async def mamgura():
 
     await ilan.drive_straight(-54,700)
 
-  
+async def ritsatMaavar2():
+    await ilan.drive_straight(-28,700)
+    # await ilan.run_back_motor_fast(100, 0.2) # ביצוע משימה 8
+    # await ilan.motor_front.run_time(1000, 5000)
+    await ilan.run_back_motor_fast(-100, 0.45) # ביצוע משימה 8
+    await wait(100)
+    await ilan.run_back_motor_fast(100, 0.2)
+    await ilan.run_back_motor_fast(-100, 0.45)
+    await wait(100)
+    await ilan.run_back_motor_fast(100, 0.2)
+    await ilan.run_back_motor_fast(-100, 0.45) # ביצוע משימה 8
+
+
 async def ritsatMaavar():
     debug=False
     await ilan.drive_straight(16, 700) # יציאה מהבית הכחול למשימה 8
@@ -375,7 +387,7 @@ colors_actions={
         Button.LEFT: test
     },
     Color.YELLOW:{
-        Button.BLUETOOTH: ritsatMaavar,
+        Button.BLUETOOTH: ritsatMaavar2,
         Button.RIGHT: mamgura
     },
     Color.WHITE:{
