@@ -354,14 +354,14 @@ async def cave():
 async def cave3():
     debug=False
     await ilan.drive_straight(-70, 500)
-    await ilan.turn(90, 200)
+    await ilan.turn(91, 200)
     await ilan.drive_straight(-35, 450)
     await ilan.wait_for_button(debug)
     await ilan.turn(-85, 200)
     await ilan.drive_straight(-3, 500)
     await ilan.run_front_motor(90, 175)
-    await multitask(ilan.run_front_motor(90, 45), ilan.drive_straight(-8.5, 300, False, False))
-    await ilan.run_back_motor(-500, -180)
+    await multitask(ilan.run_front_motor(110, 250), ilan.drive_straight(-2, 300))
+    await ilan.motor_back.run_until_stalled(-400)
     
 
 
