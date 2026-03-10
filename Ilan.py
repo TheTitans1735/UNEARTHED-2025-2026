@@ -162,18 +162,17 @@ async def ritsatMaavar2():
     await ilan.run_back_motor_fast(100, 0.25)
     await ilan.drive_straight(23, 500)
     await ilan.turn(130)
-    await ilan.run_front_motor_fast(100, 0.14)
-    await ilan.wait_for_button(debug)
-
-    await ilan.drive_straight(31, 600,False,False)
-    await ilan.wait_for_button(debug)
+    await ilan.run_front_motor_fast(100, 0.1)
+    await ilan.drive_straight(23,700,False,False)
+    await ilan.run_front_motor(100,100)
+    await ilan.drive_straight(10, 500, False, False)  
     await wait(100)
     await ilan.motor_front.run_until_stalled(300)
     await ilan.drive_straight(-10, 1000, False, False)
     await ilan.motor_front.run_until_stalled(-300, duty_limit=10)
-    await ilan.drive_straight(-5, 500, False, False)
-
-    # await ilan.drive_straight(-10, 700,False,False)
+    await ilan.drive_straight(-10, 500, False, False)
+    await ilan.run_front_motor(100,60)
+    await ilan.drive_straight(-5,100)
 
 
 async def ritsatMaavar():
@@ -270,7 +269,7 @@ async def elephent():
     await ilan.drive_straight(39, 1000)
     await ilan.turn(-25)
     await ilan.drive_straight(34.6, 700)
-    await ilan.turn(83)
+    await ilan.turn(80)
     await ilan.drive_straight(11, 500)
 
     #הופך את רצפות המבנה ומוציא את גושי העפרה 
@@ -283,7 +282,7 @@ async def elephent():
     await ilan.run_front_motor_fast(-100,0.6)
 
     
-    await multitask(ilan.drive_straight(-10, 1000),ilan.motor_front.run_until_stalled(-150,duty_limit=37))
+    await multitask(ilan.drive_straight(-12, 1000),ilan.motor_front.run_until_stalled(-150,duty_limit=37))
     await ilan.turn(-70,200)
     await ilan.drive_straight(-62,1000,gradual_stop=False)
 
