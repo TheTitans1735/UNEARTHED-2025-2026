@@ -412,3 +412,11 @@ class Robot:
             self.hub.light.blink(Color.ORANGE, [1000])
         else:
             self.hub.light.blink(Color.RED, [1000])
+
+    async def drive_by_time(self, time_seconds, speed=500):
+        """
+        נוסע קדימה במשך זמן נתון(בשניות) במהירות נתונה(במילימטרים לשנייה)
+        """
+        self.drive_base.drive(speed, 0)
+        await wait(time_seconds * 1000)
+        self.drive_base.stop()

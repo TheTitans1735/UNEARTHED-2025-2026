@@ -29,8 +29,7 @@ async def all_test():
     await stop_all()
 
 async def test():
-    await ilan.run_front_motor_fast(40,1.3)
-    await ilan.run_front_motor_fast(-100,0.6)
+    await multitask(ila)
 
     
     await multitask(ilan.drive_straight(-10, 1000),ilan.motor_front.run_until_stalled(-150,duty_limit=55))
@@ -160,21 +159,28 @@ async def ritsatMaavar2():
     await ilan.run_back_motor_fast(100, 0.25)
     await ilan.run_back_motor_fast(-100, 0.45) # ביצוע משימה 8
     await ilan.run_back_motor_fast(100, 0.25)
-    await ilan.drive_straight(23, 500)
-    await ilan.turn(130)
+    await ilan.drive_straight(22, 500)
+    await ilan.turn(130,200)
+    await ilan.wait_for_button(debug)
     await ilan.run_front_motor_fast(100, 0.1)
-    await ilan.drive_straight(23,700,False,False)
-    # await multitask(await ilan.run_front_motor(100,100)
-    # await ilan.drive_straight(10, 500, False, False))
-    await ilan.run_front_motor(100,100)
-    await ilan.drive_straight(10, 500, False, False)  
+    await ilan.drive_straight(23,700)
+    await ilan.wait_for_button(debug)
+    await ilan.motor_front.run_time(300, 400)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(13, 500)  
     await wait(100)
+    await ilan.wait_for_button(debug)
     await ilan.motor_front.run_until_stalled(300)
-    await ilan.drive_straight(-10, 1000, False, False)
-    await ilan.motor_front.run_until_stalled(-300, duty_limit=10)
-    await ilan.drive_straight(-10, 500, False, False)
-    await ilan.run_front_motor(100,60)
-    await ilan.drive_straight(-5,100)
+    await ilan.drive_straight(-7, 500, False)
+    await ilan.wait_for_button(debug)
+    await ilan.run_front_motor(-100, -110)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-5, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.motor_front.run_time(300, 500)
+    await ilan.wait_for_button(debug)
+    await multitask(await ilan.turn(-180, 250), await ilan.motor_front.run_until_stalled(-300,duty_limit=75))
+    await ilan.drive_straight(20, 500)
 
 
 async def ritsatMaavar():
@@ -284,7 +290,7 @@ async def elephent():
     await ilan.run_front_motor_fast(-100,0.6)
 
     
-    await multitask(ilan.drive_straight(-12, 1000),ilan.motor_front.run_until_stalled(-150,duty_limit=37))
+    await multitask(ilan.drive_straight(-12, 1000),ilan.motor_front.run_until_stalled(-150,duty_limit=48 ))
     await ilan.turn(-70,200)
     await ilan.drive_straight(-62,1000,gradual_stop=False)
 
@@ -417,6 +423,7 @@ colors_actions={
     Color.YELLOW:{
         Button.BLUETOOTH: ritsatMaavar2,
         Button.RIGHT: mamgura
+        Button.LEFT: test
     },
     Color.WHITE:{
         Button.BLUETOOTH: unearth,
