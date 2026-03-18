@@ -84,8 +84,8 @@ class Robot:
         self.hub = PrimeHub()
         self.left_motor = Motor(Port.F, Direction.COUNTERCLOCKWISE)
         self.right_motor = Motor(Port.D)
-        self.motor_front = Motor(Port.E)
-        self.motor_back = Motor(Port.A)
+        self.front_motor = Motor(Port.E)
+        self.back_motor = Motor(Port.A)
         self.drive_base = DriveBase(self.left_motor, self.right_motor, 62.4, 120)
         # self.color_sensor = ColorSensor(Port.C)
         self.force_sensor = ForceSensor(port=Port.B)
@@ -118,34 +118,34 @@ class Robot:
 
         # הפעלת מנוע קדמי עם פרמטרים של מהירות(מעלות לשנייה) וזווית
         
-        self.motor_front.reset_angle(0)
-        await self.motor_front.run_target(speed, angle, then=Stop.HOLD, wait=wait)
+        self.front_motor.reset_angle(0)
+        await self.front_motor.run_target(speed, angle, then=Stop.HOLD, wait=wait)
 
     
     async def run_front_motor_fast(self, duty=100, time_seconds=1.0, should_wait=True):
 
         # הפעלת מנוע קדמי במהירות גבוהה עם פרמטרים של זמן(במילישניות) וכוח
 
-        self.motor_front.dc(duty)
+        self.front_motor.dc(duty)
         if should_wait==True:
             await wait(time_seconds * 1000)
-            self.motor_front.stop()
+            self.front_motor.stop()
 
     async def run_back_motor_fast(self, duty=100, time_seconds=1.0, should_wait=True):
 
         # הפעלת מנוע אחורי במהירות גבוהה עם פרמטרים של זמן(במילישניות) וכוח
 
-        self.motor_back.dc(duty)
+        self.back_motor.dc(duty)
         if should_wait==True:
             await wait(time_seconds * 1000)
-            self.motor_back.stop() 
+            self.back_motor.stop() 
 
     async def run_back_motor(self, speed, angle, wait=True):
 
         # הפעלת מנוע אחורי עם פרמטרים של מהירות(מעלות לשנייה) וזווית
 
-        self.motor_back.reset_angle(0)
-        await self.motor_back.run_target(speed, angle, then=Stop.HOLD, wait=wait)
+        self.back_motor.reset_angle(0)
+        await self.back_motor.run_target(speed, angle, then=Stop.HOLD, wait=wait)
 
     async def wait_for_button(self, debug=True):
         if not debug:
