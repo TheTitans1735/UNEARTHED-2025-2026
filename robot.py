@@ -420,3 +420,10 @@ class Robot:
         self.drive_base.drive(speed, 0)
         await wait(time_seconds * 1000)
         self.drive_base.stop()
+    async def wfb(self, debug=True):
+        if not debug:
+            return
+        self.hub.light.blink(Color.MAGENTA, [1000])
+        while not self.hub.buttons.pressed():
+            await wait(10)
+        self.battery_status()

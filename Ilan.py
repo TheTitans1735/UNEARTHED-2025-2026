@@ -29,10 +29,7 @@ async def all_test():
     await stop_all()
 
 async def test():
-
-    
-    await multitask(ilan.drive_straight(-10, 1000),ilan.front_motor.run_until_stalled(-150,duty_limit=55))
-
+    await ilan.front_motor.run(700)
 
 async def unearth():
     """""
@@ -144,42 +141,61 @@ async def mamgura():
 
 async def ritsatMaavar2():
     debug=False
-    await ilan.drive_straight(-25,700)
+    await multitask(ilan.drive_straight(-23, 700), ilan.front_motor.run_until_stalled(-200,duty_limit=40))
+    # await ilan.drive_straight(-25,700)
     # await ilan.run_back_motor_fast(100, 0.2) # ביצוע משימה 8
     # await ilan.motor_front.run_time(1000, 5000)
-    await ilan.run_back_motor_fast(-100, 0.45) # ביצוע משימה 8
+    await ilan.run_back_motor_fast(-100, 0.4) # ביצוע משימה 8
     await wait(150)
     await ilan.run_back_motor_fast(100, 0.25)
-    await ilan.run_back_motor_fast(-100, 0.45)
+    await ilan.run_back_motor_fast(-100, 0.43)
     await wait(150)
     await ilan.run_back_motor_fast(100, 0.25)
-    await ilan.run_back_motor_fast(-100, 0.45) # ביצוע משימה 8
+    await ilan.run_back_motor_fast(-100, 0.42) # ביצוע משימה 8
     await wait(150)
     await ilan.run_back_motor_fast(100, 0.25)
-    await ilan.run_back_motor_fast(-100, 0.45) # ביצוע משימה 8
+    await ilan.run_back_motor_fast(-100, 0.42) # ביצוע משימה 8
     await ilan.run_back_motor_fast(100, 0.25)
     await ilan.drive_straight(22, 500)
-    await ilan.turn(130,200)
+    await ilan.turn(132,200)
     await ilan.wait_for_button(debug)
     await ilan.run_front_motor_fast(100, 0.1)
-    await ilan.drive_straight(23,700)
+    await ilan.drive_straight(24,700)
     await ilan.wait_for_button(debug)
-    await ilan.motor_front.run_time(300, 400)
+    await ilan.front_motor.run_time(300, 570)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(13, 500)  
     await wait(100)
     await ilan.wait_for_button(debug)
-    await ilan.motor_front.run_until_stalled(300)
+    await ilan.front_motor.run_until_stalled(300, duty_limit=75)
     await ilan.drive_straight(-7, 500, False)
+    await ilan.drive_straight(1)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(-100, -110)
+    await ilan.run_front_motor(-100, -99)
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(-5, 500)
+    await ilan.drive_straight(-7, 500)
     await ilan.wait_for_button(debug)
-    await ilan.motor_front.run_time(300, 500)
+    await ilan.front_motor.run_time(300, 500)
     await ilan.wait_for_button(debug)
-    await multitask(await ilan.turn(-180, 250), await ilan.motor_front.run_until_stalled(-300,duty_limit=75))
-    await ilan.drive_straight(20, 500)
+    await multitask( ilan.turn(-180, 250), ilan.front_motor.run_until_stalled(-300,duty_limit=75))
+    await ilan.drive_straight(7, 700, False, False)
+    # await ilan.drive_straight(7,700,False,False)
+    # await ilan.drive_base.curve(320,-45)
+    await ilan.curve(320,-45,700,)
+    await ilan.drive_straight(1, 700)
+    await ilan.wfb()
+    await ilan.drive_straight(-63)
+    await ilan.turn(90)
+    await ilan.drive_straight(-13, 1000, gradual_stop=False)
+    await ilan.run_back_motor_fast(-100, 0.2)
+    await ilan.run_back_motor_fast(100, 0.2)
+    await ilan.drive_straight(10, 1000, gradtual_start=False, gradual_stop=False)
+    await ilan.turn(-80, 400)
+    # await ilan.drive_straight2(-85, 1000, gradtual_start=False, gradual_stop=False,stop_at_end=False)
+    await multitask(ilan.drive_straight2(-85, 1000, gradtual_start=False, gradual_stop=False,stop_at_end=False), ilan.front_motor.run_until_stalled(-500,duty_limit=75))
+    await ilan.turn(-45, 700)
+    # await ilan.drive_straiht(-50, gradual_stop=False, gradtual_start=False)
+    await ilan.drive_until_touch(-500)
 
 
 async def ritsatMaavar():
@@ -428,11 +444,11 @@ colors_actions={
     Color.BLUE:{
         Button.BLUETOOTH: elephent,
         Button.RIGHT: flag,
-        Button.LEFT: test
     },
     Color.YELLOW:{
         Button.BLUETOOTH: ritsatMaavar2,
-        Button.RIGHT: mamgura
+        Button.RIGHT: mamgura,
+        Button.LEFT: test
     },
     Color.WHITE:{
         Button.BLUETOOTH: unearth,
