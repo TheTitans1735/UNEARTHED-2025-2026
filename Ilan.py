@@ -29,7 +29,6 @@ async def all_test():
     await stop_all()
 
 async def test():
-    await multitask(ila)
 
     
     await multitask(ilan.drive_straight(-10, 1000),ilan.front_motor.run_until_stalled(-150,duty_limit=55))
@@ -434,7 +433,6 @@ colors_actions={
     Color.YELLOW:{
         Button.BLUETOOTH: ritsatMaavar2,
         Button.RIGHT: mamgura
-        Button.LEFT: test
     },
     Color.WHITE:{
         Button.BLUETOOTH: unearth,
