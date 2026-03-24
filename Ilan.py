@@ -162,7 +162,7 @@ async def ritsatMaavar2():
     await ilan.run_front_motor_fast(100, 0.1)
     await ilan.drive_straight(24,700)
     await ilan.wait_for_button(debug)
-    await ilan.front_motor.run_time(300, 570)
+    await ilan.run_front_motor(400,40)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(13, 500)  
     await wait(100)
@@ -196,6 +196,7 @@ async def ritsatMaavar2():
     await ilan.turn(-45, 700)
     # await ilan.drive_straiht(-50, gradual_stop=False, gradtual_start=False)
     await ilan.drive_until_touch(-500)
+
 
 
 async def ritsatMaavar():
@@ -296,18 +297,18 @@ async def elephent():
     await ilan.drive_straight(11, 500)
 
     #הופך את רצפות המבנה ומוציא את גושי העפרה 
-    await ilan.turn(-32)
+    await ilan.turn(-28)
     await ilan.turn(16)
-    await ilan.drive_straight(1, 200)
+    await ilan.drive_straight(2, 200)
 
     #מרים את המשקולות 
     await ilan.run_front_motor_fast(40,1.3)
-    await ilan.run_front_motor_fast(-100,0.6)
+    await ilan.run_front_motor_fast(-100,0.7)
 
     
-    await multitask(ilan.drive_straight(-12, 1000),ilan.motor_front.run_until_stalled(-150,duty_limit=37))
-    await ilan.turn(-70,200)
-    await ilan.drive_straight(-62,1000,gradual_stop=False)
+    await multitask(ilan.drive_straight(-11, 1000),ilan.front_motor.run_until_stalled(-150,duty_limit=37))
+    await ilan.turn(-65,200)
+    await ilan.drive_until_button(-1000)
 
 
 
@@ -448,8 +449,6 @@ colors_actions={
     },
     Color.YELLOW:{
         Button.BLUETOOTH: ritsatMaavar2,
-        Button.RIGHT: mamgura,
-        Button.LEFT: test
         Button.RIGHT: mamgura,
         Button.LEFT: test
     },
