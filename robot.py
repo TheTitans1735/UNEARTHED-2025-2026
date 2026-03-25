@@ -346,7 +346,7 @@ class Robot:
         Drives forward until the force sensor is pressed, then stops all motors.
         """
         self.drive_base.drive(speed, 0)
-        while not self.forcesensor.pressed():
+        while not self.force_sensor.pressed():
             await wait(10)
         self.drive_base.stop()
         self.motor_front.stop()
@@ -378,8 +378,8 @@ class Robot:
         while not await self.force_sensor.pressed():
             await wait(10)
         self.drive_base.stop()
-        self.motor_front.stop()
-        self.motor_back.stop()
+        self.front_motor.stop()
+        self.back_motor.stop()
 
     async def run_until_force_touched(self, speed=750, max_force=4.200):
         """

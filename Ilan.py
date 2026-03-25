@@ -340,12 +340,17 @@ async def skeleton():
 
     await ilan.run_front_motor(300, -80)
     await ilan.wait_for_button(debug)
-    await multitask (ilan.run_front_motor(110, -300), ilan.drive_straight(3,300))
+    await multitask (ilan.run_front_motor(110, -300), ilan.drive_straight(2.8,300))
     await ilan.wait_for_button(debug)  
     await ilan.drive_straight(5,500)
+
     await ilan.wait_for_button(debug)
     # להביא את הדגל
     await ilan.back_motor.run_time(800, 3000)
+    await ilan.turn_without_right_wheel(-20, 50)
+    await ilan.back_motor.run_time(-800, 500)
+    await ilan.wait_for_button(debug)
+    await ilan.drive_straight(-10, 500)
     # await ilan.drive_straight(-4,1000,gradual_stop=False,gradtual_start=False,stop_at_end=False)
     await ilan.wait_for_button(debug)
     # await ilan.turn_without_right_wheel(22,50)
@@ -354,6 +359,14 @@ async def skeleton():
     await ilan.wait_for_button(debug)
     # await ilan.drive_straight(-30,1000,gradual_stop=False,gradtual_start=False)
     
+# async def sfailsafe():
+#     StopWatch.reset()
+#     StopWatch.resume()
+#     while True:
+#         if StopWatch.time() > 1500:
+#             await ilan.drive_straight(0.5, 500)
+#             await ilan.run_front_motor()
+#             break
 
 
 async def cave():
