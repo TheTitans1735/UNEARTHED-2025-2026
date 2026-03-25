@@ -141,25 +141,27 @@ async def mamgura():
 
 async def ritsatMaavar2():
     debug=False
-    await multitask(ilan.drive_straight(-23, 700), ilan.front_motor.run_until_stalled(-200,duty_limit=40))
+    await multitask(ilan.drive_straight(-23, 700), ilan.front_motor.run_until_stalled(-200,duty_limit=40),  ilan.run_back_motor_fast(40,0.3) # ביצוע משימה 8
+
+)
     # await ilan.drive_straight(-25,700)
     # await ilan.run_back_motor_fast(100, 0.2) # ביצוע משימה 8
     # await ilan.motor_front.run_time(1000, 5000)
-    await ilan.run_back_motor_fast(-100, 0.4) # ביצוע משימה 8
+    # await ilan.run_back_motor_fast(-100, 0.4) # ביצוע משימה 8
     await wait(150)
-    await ilan.run_back_motor_fast(100, 0.25)
-    await ilan.run_back_motor_fast(-100, 0.43)
+    await ilan.run_back_motor_fast(-100, 0.3)
     await wait(150)
-    await ilan.run_back_motor_fast(100, 0.25)
-    await ilan.run_back_motor_fast(-100, 0.42) # ביצוע משימה 8
+    await ilan.run_back_motor_fast(100, 0.3) # ביצוע משימה 8
     await wait(150)
-    await ilan.run_back_motor_fast(100, 0.25)
-    await ilan.run_back_motor_fast(-100, 0.42) # ביצוע משימה 8
-    await ilan.run_back_motor_fast(100, 0.25)
+    # await ilan.run_back_motor_fast(100, 0.4)
+    await ilan.run_back_motor_fast(-100, 0.22) # ביצוע משימה 8
+    await ilan.run_back_motor_fast(100, 0.4)
+    await ilan.run_back_motor_fast(-100, 0.35) # ביצוע משימה 8
+    await ilan.run_back_motor_fast(40,0.5)
     await ilan.drive_straight(22, 500)
     await ilan.turn(132,200)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor_fast(100, 0.1)
+    await ilan.run_front_motor_fast(100, 0.7)
     await ilan.drive_straight(24,700)
     await ilan.wait_for_button(debug)
     await ilan.run_front_motor(400,40)
@@ -294,10 +296,10 @@ async def elephent():
     await ilan.turn(-25)
     await ilan.drive_straight(34.6, 700)
     await ilan.turn(80)
-    await ilan.drive_straight(11, 500)
+    await ilan.drive_straight(10, 500)
 
     #הופך את רצפות המבנה ומוציא את גושי העפרה 
-    await ilan.turn(-28)
+    await ilan.turn(-28,120)
     await ilan.turn(16)
     await ilan.drive_straight(2, 200)
 
