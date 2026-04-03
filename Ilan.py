@@ -31,6 +31,8 @@ async def all_test():
 async def test():
     ###    
     await ilan.front_motor.run(400)
+
+@time_it
 async def unearth():
     """""
      יוצא מהבית האדום ועושה את משימות 1 ו-2
@@ -91,10 +93,11 @@ async def unearth():
     # await ilan.drive_straight(23,700)
     # await ilan.turn(67,250)
     # await ilan.drive_straight(60,1000,gradual_stop=False, gradtual_start=False) 
-
+@time_it
 async def flag():
     await ilan.drive_straight(42, 700,gradual_stop=False)
     await ilan.drive_straight(-42,1000,gradual_stop=False, gradtual_start=False)
+@time_it
 async def mamgura():
     """
     יציאה מבית כחול, ביצוע משימה 8, לאסוף את קרונית הרכבת וחזרה לבית כחול
@@ -139,6 +142,7 @@ async def mamgura():
 
     await ilan.drive_straight(-54,700)
 
+@time_it
 async def ritsatMaavar2():
     debug=False
     # time_it()
@@ -209,6 +213,8 @@ async def shipi():
     await ilan.front_motor.run_until_stalled(-100, duty_limit=70)
     await ilan.drive_straight(-10, 500,gradual_stop=False)
     await ilan.run_front_motor_fast(100,1)
+
+@time_it
 async def ritsatMaavar():
     debug=False
     await ilan.drive_straight(16, 700) # יציאה מהבית הכחול למשימה 8
@@ -285,6 +291,7 @@ async def ritsatMaavar():
     # await ilan.turn(-55,250)
     # await ilan.drive_until_button(1000) #חזרה לבית הכחול
 
+@time_it
 async def discover():
   await ilan.drive_straight(-40, 500)
   await ilan.turn(74)
@@ -296,6 +303,7 @@ async def discover():
   await ilan.drive_straight
   # לא גמור👌
 
+@time_it
 async def elephent():
     # "יוצא מבית כחול מבצע משימות 6 7 15 חוזר לבית אדום
 
@@ -321,7 +329,7 @@ async def elephent():
     await ilan.drive_until_button(-1000)
 
 
-
+@time_it
 async def forum(): 
     
     await ilan.turn(17, speed=150)
@@ -334,6 +342,7 @@ async def forum():
     await ilan.turn(-11, speed=150)
     await ilan.run_front_motor(110, -70)
 
+@time_it
 async def skeleton():
     debug=False
     """
@@ -354,7 +363,7 @@ async def skeleton():
 
     await ilan.wait_for_button(debug)
     # להביא את הדגל
-    await ilan.back_motor.run_time(800, 3000)
+    await ilan.back_motor.run_time(500, 3000)
     await ilan.turn_without_right_wheel(-20, 50)
     await ilan.back_motor.run_time(-800, 500)
     await ilan.wait_for_button(debug)
@@ -367,16 +376,16 @@ async def skeleton():
     await ilan.wait_for_button(debug)
     # await ilan.drive_straight(-30,1000,gradual_stop=False,gradtual_start=False)
     
-# async def sfailsafe():
-#     StopWatch.reset()
-#     StopWatch.resume()
-#     while True:
-#         if StopWatch.time() > 1500:
-#             await ilan.drive_straight(0.5, 500)
-#             await ilan.run_front_motor()
-#             break
+async def sfailsafe():
+    StopWatch.reset()
+    StopWatch.resume()
+    while True:
+        if StopWatch.time() > 1500:
+            await ilan.drive_straight(0.5, 500)
+            await ilan.run_front_motor(110, -300)
+            break
 
-
+@time_it
 async def cave():
 
     # יוצא מהבית האדום ועושה את משימות 3 ו-4
@@ -400,11 +409,12 @@ async def cave():
 
     await ilan.drive_straight(80, 1000,gradual_stop=False,gradtual_start=False) 
 
+@time_it
 async def cave3(): 
     debug=False
     await ilan.drive_straight(-70, 500)
     await ilan.turn(87, 200)
-    await ilan.drive_straight(-40, 450)
+    await ilan.drive_straight(-39, 450)
     await ilan.turn(-85, 200)
     await ilan.drive_straight(-2.5, 500, False, False)
     await ilan.wait_for_button(debug)
@@ -412,7 +422,7 @@ async def cave3():
     await ilan.wait_for_button(debug)
     await multitask(ilan.run_front_motor(90, 45), test2())
     await ilan.wait_for_button(debug)
-    await ilan. turn(-5 ,100)
+    # await ilan.turn(-5 ,100)
     await ilan.run_back_motor(700, -300)
     #await ilan.back_motor.run_until_stalled(-670.67, duty_limit=100)
     await ilan.wait_for_button(debug)
@@ -426,11 +436,11 @@ async def cave3():
     await ilan.turn(-87, 200)
     await ilan.drive_straight(70, 500)
 
-
+@time_it
 async def test2():
     await multitask(ilan.drive_straight(-1000, 500, False, False), wait(500), race=True)
     
-
+@time_it
 async def ship():
     """"
     יוצא מהבית האדום ועושה את משימות 11 ו-12

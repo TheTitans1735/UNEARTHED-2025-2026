@@ -28,13 +28,16 @@ class PIDController:
         self.previous_error = error
         return output
 
-
 def time_it(func):
-    def wrapper(*args, **kwargs):
+    async def wrapper(*args, **kwargs):
         timer = StopWatch()
-        result = func(*args, **kwargs)
-        run_took = timer.time() / 1000.0
-        print(f"run took {run_took} sec")
+        timer.reset()
+
+        result = await func(*args, **kwargs)  # 🔥 critical fix
+
+        run_took = timer.time() / 1000
+        print("run took", run_took, "sec")
+
         return result
     return wrapper
 
