@@ -15,6 +15,7 @@ async def stop_all():
     ilan.back_motor.stop()
     ilan.front_motor.stop()
 
+@time_it
 async def all_test():
     """
     מפעיל את כל המנועים ימינה במהירות המקסימלית ועוצר אחרי חמש שניות
@@ -93,6 +94,7 @@ async def unearth():
     # await ilan.drive_straight(23,700)
     # await ilan.turn(67,250)
     # await ilan.drive_straight(60,1000,gradual_stop=False, gradtual_start=False) 
+    
 @time_it
 async def flag():
     await ilan.drive_straight(42, 700,gradual_stop=False)
@@ -202,15 +204,18 @@ async def ritsatMaavar2():
     # await ilan.drive_straiht(-50, gradual_stop=False, gradtual_start=False)
     await ilan.drive_until_touch(-500)
 
+@time_it
 async def shipi():
+    i=0
     await ilan.drive_straight(70, 500)
     await ilan.drive_straight(-2, 400)
-    for _ in range(4):
-        await ilan.run_front_motor(speed=-500, angle=-10)
-        await ilan.run_front_motor(speed=-500, angle=10)
+    while i<3:
+        await ilan.run_front_motor(-500, -10)
+        await ilan.run_front_motor(500, 10)
+        i=i+1
     # await ilan.run_back_motor_fast(100, 4)
     await ilan.drive_straight(-10, 900)
-    await ilan.front_motor.run_until_stalled(-100, duty_limit=70)
+    await ilan.front_motor.run_until_stalled(-1000, duty_limit=70)
     await ilan.drive_straight(-10, 500,gradual_stop=False)
     await ilan.run_front_motor_fast(100,1)
 
@@ -413,7 +418,7 @@ async def cave():
 async def cave3(): 
     debug=False
     await ilan.drive_straight(-70, 500)
-    await ilan.turn(87, 200)
+    await ilan.turn(86.67, 200)
     await ilan.drive_straight(-39, 450)
     await ilan.turn(-85, 200)
     await ilan.drive_straight(-2.5, 500, False, False)
@@ -500,11 +505,19 @@ colors_actions={
         Button.RIGHT: shipi
     },
     Color.BLACK:{
-        Button.BLUETOOTH: all_test,
+        Button.BLUETOOTH:all_test,
     }
 }
 
 
+    while True:
+        try:
+            detected_color = await ilan.color_sensor.color()
+            print(f"Detected color: {detected_color}")
+            await wait(1000)
+        except Exception as e:
+            print(f"Error in test_color loop: {e}")
+            await wait(100)
 async def detect_color_and_run():
     """
     בודק את הצבע הנוכחי ומפעיל את השיטה בהתאם
