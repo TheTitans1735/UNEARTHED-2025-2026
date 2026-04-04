@@ -350,6 +350,7 @@ async def forum():
 @time_it
 async def skeleton():
     debug=False
+    time_it()
     """
     נוסע לכיוון מסימה 14
     """
@@ -357,7 +358,7 @@ async def skeleton():
     await ilan.wait_for_button(debug)
     await ilan.front_motor.run_until_stalled(500, duty_limit=75)
     await ilan.wait_for_button(debug)
-
+    
     # מרים את השלד
 
     await ilan.run_front_motor(300, -80)
@@ -368,7 +369,7 @@ async def skeleton():
 
     await ilan.wait_for_button(debug)
     # להביא את הדגל
-    await ilan.back_motor.run_time(500, 3000)
+    await ilan.back_motor.run_time(800, 3000)
     await ilan.turn_without_right_wheel(-20, 50)
     await ilan.back_motor.run_time(-800, 500)
     await ilan.wait_for_button(debug)
@@ -380,7 +381,11 @@ async def skeleton():
     # await ilan.turn_without_right_wheel(-20,50)
     await ilan.wait_for_button(debug)
     # await ilan.drive_straight(-30,1000,gradual_stop=False,gradtual_start=False)
-    
+
+async def test3():
+    await ilan.drive_straight(-45, 500)
+    await ilan.drive_straight(5, 500)
+
 async def sfailsafe():
     StopWatch.reset()
     StopWatch.resume()
@@ -423,9 +428,9 @@ async def cave3():
     await ilan.turn(-85, 200)
     await ilan.drive_straight(-2.5, 500, False, False)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(90, 175)
+    await ilan.run_front_motor(90, 700)
     await ilan.wait_for_button(debug)
-    await multitask(ilan.run_front_motor(90, 45), test2())
+    await multitask(ilan.run_front_motor(90, 1000), test2())
     await ilan.wait_for_button(debug)
     # await ilan.turn(-5 ,100)
     await ilan.run_back_motor(700, -300)
@@ -441,7 +446,6 @@ async def cave3():
     await ilan.turn(-87, 200)
     await ilan.drive_straight(70, 500)
 
-@time_it
 async def test2():
     await multitask(ilan.drive_straight(-1000, 500, False, False), wait(500), race=True)
     
@@ -505,7 +509,11 @@ colors_actions={
         Button.RIGHT: shipi
     },
     Color.BLACK:{
+<<<<<<< HEAD
         Button.BLUETOOTH:all_test,
+=======
+        Button.BLUETOOTH: test3,
+>>>>>>> 3c9f43e (Refactor skeleton and cave3 functions for improved motor control; add test3 function for driving behavior)
     }
 }
 
