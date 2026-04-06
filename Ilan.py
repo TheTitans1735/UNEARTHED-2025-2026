@@ -55,11 +55,13 @@ async def unearth2():
     await ilan.run_front_motor_fast(40, 1)
     await ilan.drive_straight_with_pid_old(-1,200,kp=00)
     await ilan.turn_without_right_wheel(-132,450)
-    await ilan.drive_straight(-14,450)
+    await ilan.drive_straight(-11,450)
     await ilan.motor_back.run_until_stalled(400,duty_limit=40)
-    await ilan.drive_straight(-5,450,gradual_stop=False)
+    await ilan.drive_straight(-13,450,gradual_stop=False)
     await ilan.run_back_motor(200,-150)
-    await multitask(ilan.motor_back.run_until_stalled(-250,duty_limit=55), ilan.motor_front.run_time(250,1), ilan.drive_straight(8,300,False,False,False))
+    await multitask(ilan.motor_back.run_until_stalled(-250,duty_limit=75), ilan.motor_front.run_time(250,1.), ilan.drive_straight(4,300,False,False,False))
+    await ilan.drive_straight(-6,300,False,False,False)
+    await ilan.drive_straight(10,300,False,False,False)
     await ilan.turn(60,400)
     await ilan.drive_straight(60,1000,gradual_stop=False, gradtual_start=False) 
 
@@ -416,22 +418,22 @@ async def sfailsafe():
             await ilan.run_front_motor(110, -300)
             break
 
-@time_it
+# @time_it
 async def cave():
 
     # יוצא מהבית האדום ועושה את משימות 3 ו-4
 
-    await multitask(ilan.drive_straight2(100, 1000), ilan.motor_front.run_until_stalled(-300,duty_limit=75))
+    await multitask(ilan.drive_straight2(100, 1000), ilan.motor_front.run_until_stalled(-200,duty_limit=75))
     await ilan.drive_until_touch(250)
     await ilan.drive_straight_with_pid_old(-1.5, 150,gradtual_start=False, gradual_stop=False)
     await ilan.turn(89, 150)
 
     # מרים את החפץ ומעביר את עגלת מכירות 
  
-    await multitask(ilan.motor_front.run_time(300, 2100), ilan.motor_back.run_time(1000, 3000))
+    await multitask(ilan.motor_front.run_until_stalled(300, duty_limit=75), ilan.motor_back.run_time(1000, 3300))
     await ilan.drive_straight_with_pid_old(8, 75, kp=00)
-    await ilan.run_front_motor(120, -80) 
-    await ilan.motor_back.run_time(-1000, 1800)
+    await ilan.run_front_motor(120, -70) 
+    await ilan.motor_back.run_time(-1000, 2300)
     await ilan.drive_straight(-12, 125)
     await ilan.run_front_motor(110,-40)
     await ilan.turn(90, 250)
@@ -439,6 +441,7 @@ async def cave():
     # חזרה לבית האדום 
 
     await ilan.drive_straight(80, 1000,gradual_stop=False,gradtual_start=False) 
+
 
 @time_it
 async def cave3(): 
@@ -489,7 +492,9 @@ async def ship():
 
     await ilan.drive_straight(-11, 900)
     await ilan.run_front_motor(110, -170)
+
     await ilan.drive_straight(20, 500,gradual_stop=False)
+    
     await ilan.drive_straight(-69, 1000, gradual_stop=False)
 
 detected_color_icons= {
@@ -533,7 +538,7 @@ colors_actions={
         Button.RIGHT: shipi
     },
     Color.BLACK:{
-        Button.BLUETOOTH: all_test, 
+        Button.BLUETOOTH: test3,
     }
 }
     
