@@ -33,13 +33,12 @@ def time_it(func):
         timer = StopWatch()
         timer.reset()
 
-        result = await func(*args, **kwargs)
+        result = await func(*args, **kwargs)  
 
         run_took = timer.time() / 1000
-        print("function took", run_took, "sec")
+        print("run took", run_took, "sec")
 
         return result
-
     return wrapper
 
 
@@ -88,8 +87,8 @@ class Robot:
         self.hub = PrimeHub()
         self.left_motor = Motor(Port.F, Direction.COUNTERCLOCKWISE)
         self.right_motor = Motor(Port.D)
-        self.front_motor = Motor(Port.E)
-        self.back_motor = Motor(Port.A)
+        self.motor_front = Motor(Port.E)
+        self.motor_back = Motor(Port.A)
         self.drive_base = DriveBase(self.left_motor, self.right_motor, 62.4, 120)
         # self.color_sensor = ColorSensor(Port.C)
         self.force_sensor = ForceSensor(port=Port.B)
@@ -121,35 +120,51 @@ class Robot:
     async def run_front_motor(self, speed=100, angle=90, wait=True):
 
         # הפעלת מנוע קדמי עם פרמטרים של מהירות(מעלות לשנייה) וזווית
-        
-        self.front_motor.reset_angle(0)
-        await self.front_motor.run_target(speed, angle, then=Stop.HOLD, wait=wait)
+        if(speed > 1000):
+            speed = 1000
+        if(speed < -1000):
+            speed = -1000
+
+        self.motor_front.reset_angle(0)
+        await self.motor_front.run_target(speed, angle, then=Stop.HOLD, wait=wait)
 
     
     async def run_front_motor_fast(self, duty=100, time_seconds=1.0, should_wait=True):
 
         # הפעלת מנוע קדמי במהירות גבוהה עם פרמטרים של זמן(במילישניות) וכוח
+        if(duty > 100):
+            duty = 100
+        if(duty < -100):
+            duty = -100
 
-        self.front_motor.dc(duty)
+        self.motor_front.dc(duty)
         if should_wait==True:
             await wait(time_seconds * 1000)
-            self.front_motor.stop()
+            self.motor_front.stop()
 
     async def run_back_motor_fast(self, duty=100, time_seconds=1.0, should_wait=True):
 
         # הפעלת מנוע אחורי במהירות גבוהה עם פרמטרים של זמן(במילישניות) וכוח
+        if(duty > 100):
+            duty = 100
+        if(duty < -100):
+            duty = -100
 
-        self.back_motor.dc(duty)
+        self.motor_back.dc(duty)
         if should_wait==True:
             await wait(time_seconds * 1000)
-            self.back_motor.stop() 
+            self.motor_back.stop() 
 
     async def run_back_motor(self, speed, angle, wait=True):
 
         # הפעלת מנוע אחורי עם פרמטרים של מהירות(מעלות לשנייה) וזווית
+        if(speed > 1000):
+            speed = 1000
+        if(speed < -1000):
+            speed = -1000
 
-        self.back_motor.reset_angle(0)
-        await self.back_motor.run_target(speed, angle, then=Stop.HOLD, wait=wait)
+        self.motor_back.reset_angle(0)
+        await self.motor_back.run_target(speed, angle, then=Stop.HOLD, wait=wait)
 
     async def wait_for_button(self, debug=True):
         if not debug:
@@ -165,7 +180,11 @@ class Robot:
                              gradual_stop=True,
                              gradtual_start=True):
         
-    # נוסע קדימה למרחק מסוים(בסנטימטרים) ובמהירות מסוימת(במילימטרים לשנייה) עם אפשרות להאטה בהתחלה ובסוף
+    # נוסע קדימה למרחק מסוים(בסנטימטרים) ובמהירות מסוימת(בميلימטרים לשנייה) עם אפשרות להאטה בהתחלה ובסוף
+        if(target_speed > 1000):
+            target_speed = 1000
+        if(target_speed < -1000):
+            target_speed = -1000
 
         acceleration_rate = target_speed / 2 if gradtual_start else target_speed
         deceleration_rate = target_speed / 2 if gradual_stop else target_speed
@@ -182,7 +201,11 @@ class Robot:
                                 gradual_stop=True,
                                 gradtual_start=True):
 
-    # נוסע קדימה למרחק(בסנטימטרים) יותר ארוך ומהירות מסוימת(במילימטרים לשנייה) עם אפשרות להאטה בהתחלה ובסוף
+    # נוסע קדימה למרחק(בסנטימטרים) יותר ארוך ומהירות מסוימת(בميلימטרים לשנייה) עם אפשרות להאטה בהתחלה ובסוף
+            if(target_speed > 1000):
+                target_speed = 1000
+            if(target_speed < -1000):
+                target_speed = -1000
 
             acceleration_rate = target_speed / 5 if gradtual_start else target_speed
             deceleration_rate = target_speed / 4 if gradual_stop else target_speed
@@ -242,6 +265,10 @@ class Robot:
         """
         מסובב את הרובוט בזווית ומהירות(מילימטרים לשנייה) נתוונים באמצעות שני הגלגלים
         """
+        if(speed > 1000):
+            speed = 1000
+        if(speed < -1000):
+            speed = -1000
         
         await wait(10)
         self.drive_base.stop()  # <-- Stop driving before resetting heading
@@ -263,6 +290,10 @@ class Robot:
         """
         מסתובב על גלגל יחיד בלבד במהירות(מילימטרים לשנייה) וזווית נתונים
         """
+        if(speed > 1000):
+            speed = 1000
+        if(speed < -1000):
+            speed = -1000
 
         self.drive_base.stop()  # <-- Stop driving before resetting heading
         self.hub.imu.reset_heading(0)
@@ -281,6 +312,10 @@ class Robot:
         """
         # מסתובב על גלגל יחיד בלבד במהירות(מילימטרים לשנייה) וזווית נתונים(כאשר המהירות חיובית)
         """
+        if(speed > 1000):
+            speed = 1000
+        if(speed < -1000):
+            speed = -1000
 
         self.drive_base.stop()  # <-- Stop driving before resetting heading
         self.hub.imu.reset_heading(0)
@@ -314,6 +349,10 @@ class Robot:
         """
         נוסע במהירות(מילימטרים לשנייה) נתונה עד לחיצה בחיישן מגע
         """
+        if(speed > 1000):
+            speed = 1000
+        if(speed < -1000):
+            speed = -1000
         self.drive_base.drive(speed, 0)
         while not await self.force_sensor.pressed():
             await wait(10)
@@ -326,6 +365,10 @@ class Robot:
         """
         נוסע במהירות(מילימטרים לשנייה) נתונה עד פגיעה בחיישן מגע
         """
+        if(speed > 1000):
+            speed = 1000
+        if(speed < -1000):
+            speed = -1000
         self.drive_base.drive(speed, 0)
         while not await self.force_sensor.touched():
             await wait(10)
@@ -382,8 +425,8 @@ class Robot:
         while not await self.force_sensor.pressed():
             await wait(10)
         self.drive_base.stop()
-        self.front_motor.stop()
-        self.back_motor.stop()
+        self.motor_front.stop()
+        self.motor_back.stop()
 
     async def run_until_force_touched(self, speed=750, max_force=4.200):
         """
