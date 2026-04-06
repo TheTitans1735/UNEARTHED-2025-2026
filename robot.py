@@ -36,7 +36,7 @@ def time_it(func):
         result = await func(*args, **kwargs)  
 
         run_took = timer.time() / 1000
-        print("run took", run_took, "sec")
+        print("Run took", run_took, "seconds to complete.")
 
         return result
     return wrapper

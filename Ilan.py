@@ -178,9 +178,9 @@ async def mamgura():
 @time_it
 async def ritsatMaavar2():
     debug=False
-    await multitask(ilan.drive_straight(-23, 700), ilan.motor_front.run_until_stalled(-200,duty_limit=40),  ilan.run_back_motor_fast(40,0.3) # ביצוע משימה 8
+    await multitask(ilan.drive_straight(-23, 700), ilan.motor_front.run_until_stalled(-200,duty_limit=40),  ilan.motor_back.run_until_stalled(300)) # ביצוע משימה 8
 
-)
+
     await ilan.run_back_motor_fast(-100, 0.3)
     await wait(150)
     await ilan.run_back_motor_fast(100, 0.7) # ביצוע משימה 8
@@ -221,10 +221,11 @@ async def ritsatMaavar2():
     await ilan.curve(320,-45,700,)
     await ilan.drive_straight(1, 700)
     await ilan.wfb()
-    await ilan.drive_straight(-63)
+    await ilan.motor_back.run_until_stalled(300, duty_limit=45)
+    await ilan.drive_straight(-65)
     await ilan.turn(90)
-    await ilan.drive_straight(-16, 1000, gradual_stop=False)
-    await ilan.run_back_motor_fast(-60, 0.22)
+    await ilan.drive_straight(-17, 1000, gradual_stop=False)
+    await ilan.run_back_motor_fast(-60, 0.4)
     await ilan.run_back_motor_fast(100, 0.3)
     await ilan.drive_straight(10, 1000, gradtual_start=False, gradual_stop=False)
     await ilan.turn(-80, 400)
@@ -406,8 +407,16 @@ async def skeleton():
     await ilan.wait_for_button(debug)
 
 async def test3():
-    await ilan.drive_straight(-45, 500)
-    await ilan.drive_straight(5, 500)
+    await ilan.drive_straight(42, 500)
+    # await ilan.wfb()
+    await ilan.drive_straight(-3, 500)
+    # await ilan.wfb()
+    await ilan.drive_straight(3, 500)
+    # await ilan.wfb()
+    await ilan.drive_straight(-3, 500)
+    #2await ilan.wfb()
+    await ilan.drive_straight(2, 500)
+    # await ilan.drive_straight(-2, 500)
 
 async def sfailsafe():
     StopWatch.reset()
@@ -482,19 +491,19 @@ async def ship():
     """
     await ilan.drive_straight(48, 500,gradual_stop=False,stop_at_end=False)
     await ilan.drive_straight(10,120,gradual_stop=False, gradtual_start=False)
+    # await ilan.turn(-4, 200)
 
     # מבצע את משימה 11
 
-    await ilan.run_front_motor(speed=110, angle=140)
+    # await ilan.run_front_motor(speed=110, angle=140)
     await ilan.run_back_motor_fast(100, 4)
+    # await ilan.turn(-2.5, 200)
 
     # מבצע את משימה 12
 
     await ilan.drive_straight(-11, 900)
     await ilan.run_front_motor(110, -170)
-
     await ilan.drive_straight(20, 500,gradual_stop=False)
-    
     await ilan.drive_straight(-69, 1000, gradual_stop=False)
 
 detected_color_icons= {
@@ -519,11 +528,12 @@ colors_actions={
     Color.BLUE:{
         Button.BLUETOOTH: elephent,
         Button.RIGHT: flag,
+        Button.LEFT: test3,
     },
     Color.YELLOW:{
         Button.BLUETOOTH: ritsatMaavar2,
         Button.RIGHT: mamgura,
-        Button.LEFT: test
+        # Button.LEFT:
     },
     Color.WHITE:{
         Button.BLUETOOTH: unearth2,
