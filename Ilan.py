@@ -533,7 +533,7 @@ colors_actions={
         Button.RIGHT: shipi
     },
     Color.BLACK:{
-        Button.BLUETOOTH: test3,
+        Button.BLUETOOTH: all_test, 
     }
 }
     
