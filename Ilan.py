@@ -492,13 +492,13 @@ async def ship():
     """"
     יוצא מהבית האדום ועושה את משימות 11 ו-12
     """
-    await ilan.drive_straight(48, 500,gradual_stop=False,stop_at_end=False)
-    await ilan.drive_straight(10,120,gradual_stop=False, gradtual_start=False)
+    await ilan.drive_straight(60, 500)
+    # await ilan.drive_straight(10,120,gradual_stop=False, gradtual_start=False)
     # await ilan.turn(-4, 200)
 
     # מבצע את משימה 11
 
-    # await ilan.run_front_motor(speed=110, angle=140)
+    await ilan.run_front_motor(speed=110, angle=140)
     await ilan.run_back_motor_fast(100, 4)
     # await ilan.turn(-2.5, 200)
 
@@ -507,7 +507,7 @@ async def ship():
     await ilan.drive_straight(-11, 900)
     await ilan.run_front_motor(110, -170)
     await ilan.drive_straight(20, 500,gradual_stop=False)
-    await ilan.drive_straight(-69, 1000, gradual_stop=False)
+    await ilan.drive_straight(-72, 1000, gradual_stop=False)
 
 detected_color_icons= {
     
