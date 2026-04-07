@@ -178,9 +178,10 @@ async def mamgura():
 @time_it
 async def ritsatMaavar2():
     debug=False
-    await multitask(ilan.drive_straight(-23, 700), ilan.motor_front.run_until_stalled(-200,duty_limit=40),  ilan.motor_back.run_until_stalled(300)) # ביצוע משימה 8
+    await multitask(ilan.drive_straight(-23, 700), ilan.motor_front.run_until_stalled(-200,duty_limit=40), ilan.motor_back.run_until_stalled(300)
+) # ביצוע משימה 8
 
-
+    await ilan.motor_back.run_until_stalled(300)
     await ilan.run_back_motor_fast(-100, 0.3)
     await wait(150)
     await ilan.run_back_motor_fast(100, 0.7) # ביצוע משימה 8
@@ -225,6 +226,8 @@ async def ritsatMaavar2():
     await ilan.drive_straight(-65)
     await ilan.turn(90)
     await ilan.drive_straight(-17, 1000, gradual_stop=False)
+    await ilan.motor_back.run_until_stalled(300)
+
     await ilan.run_back_motor_fast(-60, 0.4)
     await ilan.run_back_motor_fast(100, 0.3)
     await ilan.drive_straight(10, 1000, gradtual_start=False, gradual_stop=False)
