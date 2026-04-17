@@ -178,10 +178,8 @@ async def mamgura():
 @time_it
 async def ritsatMaavar2():
     debug=False
-    await multitask(ilan.drive_straight(-24, 700), ilan.motor_front.run_until_stalled(-200,duty_limit=60) , ilan.motor_back.run_until_stalled(300)
-) # ביצוע משימה 8
-
-    await ilan.motor_back.run_until_stalled(300)
+    await multitask(ilan.drive_straight(-15, 700), ilan.motor_front.run_until_stalled(-200,duty_limit=60)) # ביצוע משימה 8
+    await multitask(ilan.motor_back.run_until_stalled(300), ilan.drive_straight(-5, 700, False, False, False))
     # await ilan.drive_straight(-3, 500)
     await ilan.run_back_motor_fast(-100, 0.3)
     await wait(150)
@@ -204,7 +202,7 @@ async def ritsatMaavar2():
     await ilan.run_front_motor_fast(100, 0.1)
     await ilan.drive_straight(24,700)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(400,130)
+    await ilan.run_front_motor(400,110)
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(13, 500)  
     await wait(100)
@@ -356,7 +354,7 @@ async def elephent():
     #נוסע לכיוון המשימות 5, 6 ו-7
     await ilan.drive_straight(39, 1000)
     await ilan.turn(-25)
-    await ilan.drive_straight(34.6, 700)
+    await ilan.drive_straight(34.6, 1000)
     await ilan.turn(80)
     await ilan.drive_straight(10, 500)
 
@@ -370,8 +368,8 @@ async def elephent():
     await ilan.run_front_motor_fast(-100,0.7)
 
     
-    await multitask(ilan.drive_straight(-11, 1000),ilan.motor_front.run_until_stalled(-150,duty_limit=77))
-    await ilan.turn(-65,200)
+    await multitask(ilan.drive_straight(-11, 1000, False, False),ilan.motor_front.run_until_stalled(-150,duty_limit=70))
+    await ilan.turn(-60,300)
     await ilan.drive_until_button(-500)
 
 
