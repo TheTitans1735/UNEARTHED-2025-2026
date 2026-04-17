@@ -48,7 +48,7 @@ async def unearth2():
     await ilan.turn(90,350)
     await ilan.turn(-10,350)
     await ilan.run_front_motor(200,100)
-    await ilan.turn(17)
+    await ilan.turn(20)
     await wait(500)
     await ilan.run_front_motor(100,-95)
     await ilan.drive_until_button(500)
