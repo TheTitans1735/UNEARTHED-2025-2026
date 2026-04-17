@@ -47,27 +47,25 @@ async def unearth2():
     )
     await ilan.turn(90,350)
     await ilan.turn(-10,350)
-    await ilan.run_front_motor(200,100)
-    await ilan.turn(20)
-    await wait(500)
+    await multitask( ilan.run_front_motor(200,100), ilan.turn(7))
+    await wait(200)
     await ilan.run_front_motor(100,-95)
     await ilan.drive_until_button(500)
     await ilan.run_front_motor_fast(40, 1)
     await ilan.drive_straight_with_pid_old(-1,200,kp=00)
-    await ilan.turn_without_right_wheel(-132,450)
+    await ilan.turn_without_right_wheel(-135,450)
     await ilan.drive_straight(-11,450)
     await ilan.motor_back.run_until_stalled(400,duty_limit=40)
     await ilan.drive_straight(-13,450,gradual_stop=False)
     await ilan.run_back_motor(200,-150)
     await multitask(ilan.motor_back.run_until_stalled(-250,duty_limit=75), ilan.motor_front.run_time(250,1.), ilan.drive_straight(4,300,False,False,False))
-    await ilan.drive_straight(-6,300,False,False,False)
-    await ilan.drive_straight(10,300,False,False,False)
+    # await ilan.drive_straight(-6,300,False,False,False)
+    # await ilan.drive_straight(10,300,False,False,False)
     await ilan.turn(60,400)
     await ilan.drive_straight(60,1000,gradual_stop=False, gradtual_start=False) 
 
 async def unearth():
-    """""
-     יוצא מהבית האדום ועושה את משימות 1 ו-2
+    """""     יוצא מהבית האדום ועושה את משימות 1 ו-2
     """
     await multitask(
         ilan.drive_straight(-65, 750), 
@@ -446,10 +444,10 @@ async def cave():
 
     # מרים את החפץ ומעביר את עגלת מכירות 
  
-    await multitask(ilan.motor_front.run_until_stalled(300, duty_limit=75), ilan.motor_back.run_time(1000, 3300))
+    await multitask(ilan.motor_front.run_until_stalled(300, duty_limit=75), ilan.motor_back.run_time(1000, 1500))
     await ilan.drive_straight_with_pid_old(8, 75, kp=00)
     await ilan.run_front_motor(120, -70) 
-    await ilan.motor_back.run_time(-1000, 2300)
+    await ilan.motor_back.run_time(-1000, 1200)
     await ilan.drive_straight(-12, 125)
     await ilan.run_front_motor(110,-40)
     await ilan.turn(90, 250)
