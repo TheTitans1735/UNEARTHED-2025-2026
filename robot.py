@@ -261,7 +261,7 @@ class Robot:
         if stop_at_end:
             self.drive_base.stop()
 
-    async def turn(self, degrees, speed=150):
+    async def turn(self, degrees, speed=150, heading_reset=True):
         """
         מסובב את הרובוט בזווית ומהירות(מילימטרים לשנייה) נתוונים באמצעות שני הגלגלים
         """
@@ -272,7 +272,8 @@ class Robot:
         
         await wait(10)
         self.drive_base.stop()  # <-- Stop driving before resetting heading
-        self.hub.imu.reset_heading(0)
+        if heading_reset:
+            self.hub.imu.reset_heading(0)
         if degrees > 0:
             self.left_motor.run(speed)
             self.right_motor.run(-speed)

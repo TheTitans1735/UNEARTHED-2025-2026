@@ -432,19 +432,24 @@ async def sfailsafe():
             await ilan.run_front_motor(110, -300)
             break
 
-# @time_it
+@time_it
 async def cave():
-
+    debug=False
     # יוצא מהבית האדום ועושה את משימות 3 ו-4
 
     await multitask(ilan.drive_straight2(100, 1000), ilan.motor_front.run_until_stalled(-200,duty_limit=75))
     await ilan.drive_until_touch(250)
-    await ilan.drive_straight_with_pid_old(-1.5, 150,gradtual_start=False, gradual_stop=False)
-    await ilan.turn(89, 150)
+    await ilan.wfb(debug)
+    await ilan.drive_straight_with_pid_old(-1.5, 150,gradtual_start=False, gradual_stop=False, kp=0)
+    await ilan.wfb(debug)
+    await ilan.turn(89, 150, heading_reset=False)
+    debug=True
+    await ilan.wfb(debug)
 
     # מרים את החפץ ומעביר את עגלת מכירות 
  
     await multitask(ilan.motor_front.run_until_stalled(300, duty_limit=75), ilan.motor_back.run_time(1000, 1500))
+    await ilan.wfb(debug);
     await ilan.drive_straight_with_pid_old(8, 75, kp=00)
     await ilan.run_front_motor(120, -70) 
     await ilan.motor_back.run_time(-1000, 1200)
