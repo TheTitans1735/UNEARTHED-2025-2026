@@ -181,9 +181,9 @@ class Robot:
                              gradtual_start=True):
         
     # נוסע קדימה למרחק מסוים(בסנטימטרים) ובמהירות מסוימת(בميلימטרים לשנייה) עם אפשרות להאטה בהתחלה ובסוף
-        if(target_speed > 1000):
+        if target_speed > 1000:
             target_speed = 1000
-        if(target_speed < -1000):
+        if target_speed < -1000:
             target_speed = -1000
 
         acceleration_rate = target_speed / 2 if gradtual_start else target_speed

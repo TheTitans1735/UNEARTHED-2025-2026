@@ -267,6 +267,22 @@ async def ritsatMaavar2():
     await ilan.drive_straight(-30, gradual_stop=False, gradtual_start=False)
     # await ilan.drive_until_touch(-500)
 
+async def ritsaatmaavardupe():
+    await ilan.wfb()
+    await ilan.motor_back.run_until_stalled(300, duty_limit=45)
+    await ilan.drive_straight(-65)
+    await ilan.turn(90)
+    await ilan.drive_straight(-17, 1000, gradual_stop=False)
+    await ilan.run_back_motor_fast(-60, 0.4)
+    await ilan.drive_straight(10, 1000, gradtual_start=False, gradual_stop=False)
+    await ilan.run_back_motor_fast(100, 0.5)
+    await ilan.turn(-87, 400)
+    # await ilan.drive_straight2(-85, 1000, gradtual_start=False, gradual_stop=False,stop_at_end=False)
+    await multitask(ilan.drive_straight2(-15, 1000, gradtual_start=False, gradual_stop=False,stop_at_end=False), ilan.motor_front.run_until_stalled(-500,duty_limit=75))
+    await ilan.turn(-45, 700)
+    await ilan.drive_straight(-30, gradual_stop=False, gradtual_start=False)
+    # await ilan.drive_until_touch(-500)
+
 @time_it
 async def shipi():
     await ilan.drive_straight(75, 700)
@@ -474,16 +490,16 @@ async def cave():
     await ilan.drive_straight_with_pid_old(-1.5, 150,gradtual_start=False, gradual_stop=False, kp=0)
     await ilan.wfb(debug)
     await ilan.turn(89, 150, heading_reset=False)
-    debug=True
     await ilan.wfb(debug)
 
     # מרים את החפץ ומעביר את עגלת מכירות 
  
     await multitask(ilan.motor_front.run_until_stalled(300, duty_limit=75), ilan.motor_back.run_time(1000, 1500))
-    await ilan.wfb(debug);
+    await ilan.wfb(debug)
     await ilan.drive_straight_with_pid_old(8, 75, kp=00)
     await ilan.run_front_motor(120, -70) 
     await ilan.motor_back.run_time(-1000, 1200)
+    await wait(500)
     await ilan.drive_straight(-12, 125)
     await ilan.run_front_motor(110,-40)
     await ilan.turn(90, 250)
@@ -492,6 +508,18 @@ async def cave():
 
     await ilan.drive_straight(80, 1000,gradual_stop=False,gradtual_start=False) 
 
+@time_it
+async def pale():
+    kia=0.1
+    while kia<=1:
+        await ilan.drive_straight_with_pid_old(30, 700, False, gradual_stop=False, ki=kia, kd=1)
+        if ilan.force_sensor.force()>0:
+            stop_all
+        kia+=0.1
+        await ilan.wfb(True)
+    await ilan.drive_straight(22, 1000, gradtual_start=False)
+    await ilan.drive_straight(-22, 50)
+    await ilan.drive_straight(-42, 1000)
 
 @time_it
 async def cave3(): 
@@ -547,6 +575,14 @@ async def ship():
     await ilan.drive_straight(20, 500,gradual_stop=False)
     await ilan.drive_straight(-72, 1000, gradual_stop=False)
 
+async def test():
+    for _ in range(3):
+        await ilan.turn(-20)
+        await ilan.run_front_motor(700, -50)
+        await ilan.turn(20)
+        await ilan.run_front_motor(700, 50)
+
+
 detected_color_icons= {
     
     # מגדיר אייקון לכל צבע
@@ -573,12 +609,13 @@ colors_actions={
     },
     Color.YELLOW:{
         Button.BLUETOOTH: ritsatMaavar_dup,
+        Button.BLUETOOTH: ritsaatmaavardupe,
         Button.RIGHT: mamgura,
         Button.LEFT:test3
     },
     Color.WHITE:{
         Button.BLUETOOTH: unearth2,
-        Button.LEFT: discover,
+        Button.LEFT: pale,
         Button.RIGHT: cave
     },
     Color.RED:{
