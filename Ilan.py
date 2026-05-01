@@ -175,6 +175,7 @@ async def mamgura():
 
 @time_it
 async def ritsatMaavar_dup():
+    debug=False
     await ilan.motor_back.run_until_stalled(300, duty_limit=45)
     await ilan.drive_straight(-65)
     await ilan.turn(90,270)
@@ -184,25 +185,27 @@ async def ritsatMaavar_dup():
     await ilan.run_back_motor_fast(100, 0.5)
     await ilan.turn(-100, 200)
     # await ilan.drive_straight2(-85, 1000, gradtual_start=False, gradual_stop=False,stop_at_end=False)
-    await ilan.drive_straight(-21, 700)
+    await ilan.drive_straight(-25, 700)
     # await ilan.wfb()
-    await ilan.turn(92, 220)
+    await ilan.turn(90, 220)
     # await ilan.wfb()
     # await ilan.drive_straight(6)
-    await ilan.run_front_motor(700,200)
+    await ilan.run_front_motor(700,217)
     # await ilan.wfb()
     for _ in range(3):
-        await ilan.turn(-25,200)
+        await ilan.turn(-27,100)
         await ilan.run_front_motor(700, -50)
-        await ilan.turn(22,200)
+        await ilan.turn(24,100)
         await ilan.run_front_motor(700, 50)
     await ilan.run_front_motor(700, -123)
-    await ilan.turn(70 )
-    await ilan.wfb()
+    await ilan.drive_straight(-2, 700)
+    await ilan.turn(80)
+    await ilan.wfb(debug)
     await ilan.drive_straight(54, 1000,False,False,False)
-    await ilan.wfb()
+    await ilan.wfb(debug)
     await ilan.turn(-40)
     await ilan.drive_until_button(1000)
+
 
 @time_it
 async def ritsatMaavar2():
@@ -609,7 +612,7 @@ colors_actions={
     },
     Color.YELLOW:{
         Button.BLUETOOTH: ritsatMaavar_dup,
-        Button.BLUETOOTH: ritsaatmaavardupe,
+        # Button.BLUETOOTH: ritsaatmaavardupe,
         Button.RIGHT: mamgura,
         Button.LEFT:test3
     },
