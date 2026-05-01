@@ -43,7 +43,7 @@ async def unearth2():
     await multitask(
         ilan.drive_straight(-65, 750), 
         ilan.motor_front.run_until_stalled(-200,duty_limit=40), 
-        ilan.motor_back.run_time(200,1500)
+        ilan.motor_back.run_time(-200,1700)
     )
     await ilan.turn(90,350)
     await ilan.turn(-10,350)
@@ -52,12 +52,13 @@ async def unearth2():
     await ilan.run_front_motor(100,-95)
     await ilan.drive_until_button(500)
     await ilan.run_front_motor_fast(40, 1)
+    await ilan.drive_straight(-5,1000)
     await ilan.drive_straight_with_pid_old(-1,200,kp=00)
     await ilan.turn_without_right_wheel(-135,450)
     await ilan.drive_straight(-11,450)
-    await ilan.motor_back.run_until_stalled(400,duty_limit=40)
+    await ilan.run_back_motor(200,500)
     await ilan.drive_straight(-13,450,gradual_stop=False)
-    await ilan.run_back_motor(200,-150)
+    await ilan.run_back_motor(200,150)
     await multitask(ilan.motor_back.run_until_stalled(-250,duty_limit=75), ilan.motor_front.run_time(250,1.), ilan.drive_straight(4,300,False,False,False))
     # await ilan.drive_straight(-6,300,False,False,False)
     # await ilan.drive_straight(10,300,False,False,False)
@@ -70,23 +71,23 @@ async def unearth():
     await multitask(
         ilan.drive_straight(-65, 750), 
         ilan.motor_front.run_until_stalled(-200,duty_limit=40), 
-        ilan.motor_back.run_time(200,1500)
+        ilan.motor_back.run_time(-200,1500)
     )
     await ilan.turn(90,350)
     await ilan.turn(-10,350)
-    await ilan.run_front_motor(200,100)
+    await ilan.run_front_motor(200,-100)
     await ilan.turn(17)
     await wait(500)
-    await ilan.run_front_motor(100,-95)
+    await ilan.run_front_motor(100,95)
     await ilan.drive_until_button(500)
-    await ilan.run_front_motor(300, 170)
+    await ilan.run_front_motor(300, -170)
     await ilan.drive_straight_with_pid_old(-1,200,kp=00)
     await ilan.turn_without_right_wheel(-130,450)
     await ilan.drive_straight(-10,450)
     await ilan.motor_back.run_until_stalled(400,duty_limit=40)
     await ilan.drive_straight(-5,450,gradual_stop=False)
-    await ilan.run_back_motor(200,-150)
-    await multitask(ilan.motor_back.run_until_stalled(-250,duty_limit=55), ilan.motor_front.run_time(250,1), ilan.drive_straight(8,300,False,False,False))
+    await ilan.run_back_motor(200,150)
+    await multitask(ilan.motor_back.run_until_stalled(250,duty_limit=55), ilan.motor_front.run_time(-250,1), ilan.drive_straight(8,300,False,False,False))
     await ilan.turn(60,400)
     await ilan.drive_straight(60,1000,gradual_stop=False, gradtual_start=False) 
 
@@ -492,6 +493,7 @@ async def cave():
     await ilan.wfb(debug)
     await ilan.drive_straight_with_pid_old(-1.5, 150,gradtual_start=False, gradual_stop=False, kp=0)
     await ilan.wfb(debug)
+    await wait(200)
     await ilan.turn(89, 150, heading_reset=False)
     await ilan.wfb(debug)
 
@@ -513,16 +515,8 @@ async def cave():
 
 @time_it
 async def pale():
-    kia=0.1
-    while kia<=1:
-        await ilan.drive_straight_with_pid_old(30, 700, False, gradual_stop=False, ki=kia, kd=1)
-        if ilan.force_sensor.force()>0:
-            stop_all
-        kia+=0.1
-        await ilan.wfb(True)
-    await ilan.drive_straight(22, 1000, gradtual_start=False)
-    await ilan.drive_straight(-22, 50)
-    await ilan.drive_straight(-42, 1000)
+    await ilan.drive_straight(64.5, 1000)
+    await ilan.drive_straight(-62, 1000)
 
 @time_it
 async def cave3(): 
