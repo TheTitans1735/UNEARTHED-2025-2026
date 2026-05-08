@@ -89,7 +89,7 @@ class Robot:
         self.right_motor = Motor(Port.D)
         self.motor_front = Motor(Port.E)
         self.motor_back = Motor(Port.A)
-        self.drive_base = DriveBase(self.left_motor, self.right_motor, 62.4, 120)
+        self.drive_base = DriveBase(self.left_motor, self.right_motor, 62.4, 100)
         # self.color_sensor = ColorSensor(Port.C)
         self.force_sensor = ForceSensor(port=Port.B)
         self.drive_base.use_gyro(True)
@@ -261,10 +261,12 @@ class Robot:
         if stop_at_end:
             self.drive_base.stop()
 
-    async def turn(self, degrees, speed=150, heading_reset=True):
+    async def turn(self, degrees, speed=150, heading_reset=True, timeout_seconds=None):
         """
         מסובב את הרובוט בזווית ומהירות(מילימטרים לשנייה) נתוונים באמצעות שני הגלגלים
         """
+        timer=StopWatch()
+        timer.reset()
         if(speed > 1000):
             speed = 1000
         if(speed < -1000):
@@ -283,6 +285,8 @@ class Robot:
 
         while abs(self.hub.imu.heading() - degrees) > 2:
             await wait(0.1)
+            if timeout_seconds is not None and timer.time() > timeout_seconds * 1000:
+                break
 
         self.left_motor.stop()
         self.right_motor.stop()
