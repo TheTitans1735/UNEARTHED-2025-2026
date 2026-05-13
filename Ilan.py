@@ -222,32 +222,32 @@ async def ritsatMaavar_dup():
 @time_it
 async def ritsatMaavar2():
     debug=False
-    await multitask(ilan.drive_straight(-16, 700, False, False, False), ilan.motor_front.run_until_stalled(-200,duty_limit=60), ilan.motor_back.run_until_stalled(300, duty_limit=45)) # ביצוע משימה 8
+    await multitask(ilan.drive_straight(-24, 500), ilan.motor_front.run_until_stalled(-200,duty_limit=60),ilan.motor_back.run_until_stalled(300,duty_limit=40)) # ביצוע משימה 8
     # await ilan.drive_straight(-3, 500)
     await ilan.run_back_motor_fast(-100, 0.3)
     await wait(150)
-    await ilan.run_back_motor_fast(100, 0.5) # ביצוע משימה 8
+    await ilan.run_back_motor_fast(100, 0.4) # ביצוע משימה 8
     await wait(150)
     # await ilan.run_back_motor_fast(100, 0.4)
-    await ilan.run_back_motor_fast(-100, 0.3)
+    await ilan.run_back_motor_fast(-100, 0.4)
     await wait(150)
-    await ilan.run_back_motor_fast(100, 0.5) # ביצוע משימה 8
-    await ilan.run_back_motor_fast(-100, 0.35)
+    await ilan.run_back_motor_fast(100, 0.6) # ביצוע משימה 8
+    await ilan.run_back_motor_fast(-100, 0.4)
     await wait(150)
     # await ilan.run_back_motor_fast(100, 0.7) # ביצוע משימה 8
     # await ilan.run_back_motor_fast(-100, 0.4)
     
     await ilan.run_back_motor_fast(40,0.9)    # await ilan.run_back_motor_fast(100, 0.2) # ביצוע משימה 8
 
-    await ilan.drive_straight2(27, 900)
-    await ilan.turn(130,200)
+    await ilan.drive_straight(25, 500)
+    await ilan.turn(131,200)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor_fast(100, 0.2)
-    await ilan.drive_straight(24,700)
+    await ilan.run_front_motor_fast(100, 0.22)
+    await ilan.drive_straight(37,700)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor(400,30)
+    # await ilan.run_front_motor(400,110)
     await ilan.wait_for_button(debug)
-    await ilan.drive_straight(13, 500)  
+    # await ilan.drive_straight(13, 500)  
     await wait(100)
     await ilan.wait_for_button(debug)
     await ilan.motor_front.run_until_stalled(300, duty_limit=75)
@@ -258,15 +258,14 @@ async def ritsatMaavar2():
     await ilan.wait_for_button(debug)
     await ilan.drive_straight(-7, 500)
     await ilan.wait_for_button(debug)
-    await ilan.motor_front.run_time(300, 400)
+    await ilan.motor_front.run_time(300, 500)
     await ilan.wait_for_button(debug)
-    # await ilan.motor_front.run_until_stalled(-300,duty_limit=75)
-    await multitask(ilan.turn(-180, 250),fb())
+    await multitask( ilan.turn(-180, 250), fb())
     await ilan.drive_straight(7, 700, False, False)
     # await ilan.drive_straight(7,700,False,False)
     # await ilan.drive_base.curve(320,-45)
-    await multitask(ilan.curve(320,-45,700))
-    await ilan.drive_straight(1, 700)
+    await ilan.curve(320,-45,700,)
+    await ilan.drive_straight(1, 700)   
     await ilan.wfb()
     await ilan.motor_back.run_until_stalled(300, duty_limit=45)
     await ilan.drive_straight2(-65)
@@ -279,12 +278,12 @@ async def ritsatMaavar2():
     await ilan.turn(-90, 170)
     await ilan.drive_straight(-25, 700)
     await ilan.turn(90, 220)
-    await ilan.run_front_motor(700,333)
-    for _ in range(3):
-        await ilan.turn(-32,120)
+    await ilan.run_front_motor(700,290)
+    for _ in range(4):
+        await ilan.turn(-34.5,110)
         await ilan.run_front_motor(700, -50)
         await ilan.turn(32,180)
-        await ilan.run_front_motor(700, 50)
+        await ilan.run_front_motor(700, 54)
     await ilan.run_front_motor(700, -123)
     await ilan.drive_straight(-4, 700)
     await ilan.turn(80)
@@ -297,6 +296,7 @@ async def ritsatMaavar2():
 async def ritsatMaavar22():
     debug=False
     timer=StopWatch()
+    
     await ilan.wfb()
     await ilan.motor_front.run_until_stalled(-300, duty_limit=45)
     await ilan.motor_back.run_until_stalled(300, duty_limit=45)
@@ -675,7 +675,7 @@ colors_actions={
         Button.LEFT: test3,
     },
     Color.YELLOW:{
-        Button.BLUETOOTH: ritsatMaavar22,
+        Button.BLUETOOTH: ritsatMaavar2,
         # Button.BLUETOOTH: ritsaatmaavardupe,
         Button.RIGHT: mamgura,
         Button.LEFT:test3

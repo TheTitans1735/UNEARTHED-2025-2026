@@ -89,7 +89,7 @@ class Robot:
         self.right_motor = Motor(Port.D)
         self.motor_front = Motor(Port.E)
         self.motor_back = Motor(Port.A)
-        self.drive_base = DriveBase(self.left_motor, self.right_motor, 62.4, 100)
+        self.drive_base = DriveBase(self.left_motor, self.right_motor, 62.4, 110)
         # self.color_sensor = ColorSensor(Port.C)
         self.force_sensor = ForceSensor(port=Port.B)
         self.drive_base.use_gyro(True)
