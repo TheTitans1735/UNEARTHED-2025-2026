@@ -72,7 +72,7 @@ async def unearth2():
     # await ilan.drive_straight(-6,300,False,False,False)
     # await ilan.drive_straight(10,300,False,False,False)
     await ilan.turn(60,400)
-    await ilan.drive_straight(60,1000,gradual_stop=False, gradtual_start=False) 
+    await ilan.drive_straight(65,1000,gradual_stop=False, gradtual_start=False) 
 
 async def unearth():
     """""     יוצא מהבית האדום ועושה את משימות 1 ו-2
@@ -547,7 +547,7 @@ async def sfailsafe():
 
 @time_it
 async def cave():
-    debug=False
+    debug=True
     # יוצא מהבית האדום ועושה את משימות 3 ו-4
 
     await multitask(ilan.drive_straight2(100, 1000), ilan.motor_front.run_until_stalled(-150,duty_limit=75))
@@ -556,19 +556,27 @@ async def cave():
     await ilan.drive_straight_with_pid_old(-1.5, 150,gradtual_start=False, gradual_stop=False, kp=0)
     await ilan.wfb(debug)
     await wait(200)
+    await ilan.wfb(debug)
     await ilan.turn(89, 150, heading_reset=False)
     await ilan.wfb(debug)
 
     # מרים את החפץ ומעביר את עגלת מכירות 
  
-    await multitask(ilan.motor_front.run_until_stalled(300, duty_limit=75), ilan.motor_back.run_time(1000, 1500))
+    await multitask(ilan.motor_front.run_until_stalled(300, duty_limit=50),
+    ilan.motor_back.run_time(900, 1500))
     await ilan.wfb(debug)
     await ilan.drive_straight_with_pid_old(9, 75, kp=00)
+    await ilan.wfb(debug)
     await ilan.run_front_motor(120, -75) 
+    await ilan.wfb(debug)
     await ilan.motor_back.run_time(-650, 3000)
-    await wait(500)
+    await ilan.wfb(debug)
+    await wait(1500)
+    await ilan.wfb(debug)
     await ilan.drive_straight(-10, 125)
+    await ilan.wfb(debug)
     await ilan.run_front_motor(110,-40)
+    await ilan.wfb(debug)
     await ilan.turn(90, 250)
 
     # חזרה לבית האדום 
@@ -577,8 +585,8 @@ async def cave():
 
 @time_it
 async def pale():
-    await ilan.drive_straight(64.5, 1000)
-    await ilan.drive_straight(-62, 1000)
+    await ilan.drive_straight(62.5, 1000)
+    await ilan.drive_straight(-62.5, 1000)
 
 @time_it
 async def cave3(): 
