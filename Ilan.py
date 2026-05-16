@@ -240,9 +240,9 @@ async def ritsatMaavar2():
     await ilan.run_back_motor_fast(40,0.9)    # await ilan.run_back_motor_fast(100, 0.2) # ביצוע משימה 8
 
     await ilan.drive_straight(25, 500)
-    await ilan.turn(131,200)
+    await ilan.turn(129,200)
     await ilan.wait_for_button(debug)
-    await ilan.run_front_motor_fast(100, 0.22)
+    await ilan.run_front_motor_fast(100, 0.2)
     await ilan.drive_straight(37,700)
     await ilan.wait_for_button(debug)
     # await ilan.run_front_motor(400,110)
